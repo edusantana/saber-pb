@@ -59,12 +59,14 @@ function atualizaRegistroDeFrequencia(){
         document.getElementById('class_frequency_finished_at').value = valores[2];
     }
     if (valores.length > 3){
-        document.getElementById('class_frequency_justification').value = valores[2];
+        document.getElementById('class_frequency_justification').value = valores[3];
     }    
     return;
 }
 
-if (window.location.pathname.includes("class_frequencies/new")){
+if (window.location.pathname.includes("class_frequencies") && 
+    (window.location.pathname.includes("/new") || window.location.pathname.includes("/edit"))
+    ){
     console.log('Adicionando input de registro de frequência')    
     colagem.addEventListener("change", atualizaRegistroDeFrequencia);
     breadcrumbs.appendChild(colagem); //appendChild
@@ -92,12 +94,13 @@ function atualizaRegistroDeAula(){
         document.getElementById('class_log_content').value = valores[2];
     }
     if (valores.length > 3){
-        document.getElementById('class_log_activity').value = valores[2];
-    }    
+        document.getElementById('class_log_activity').value = valores[3];
+    }
     return;
 }
 
-if (window.location.pathname.includes("class_logs/new")){
+if (window.location.pathname.includes("class_logs") && 
+        (window.location.pathname.includes("/new") || window.location.pathname.includes("/edit"))){
     console.log('Adicionando input de registro de aula')    
     colagem.addEventListener("change", atualizaRegistroDeAula);
     breadcrumbs.appendChild(colagem); //appendChild
