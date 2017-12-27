@@ -1,6 +1,6 @@
 # saber-pb
 
-Extensão para o Google Chrome com melhorias para a plataforma do saber da Paraíba
+Extensão para o Google Chrome com melhorias para a plataforma do saber do governo do estado da Paraíba.
 
 # Modelos de planilha
 
