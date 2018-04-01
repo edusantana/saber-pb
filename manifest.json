@@ -2,8 +2,9 @@
   "manifest_version":2,
 
   "name": "Saber PB",
-  "description": "Facilia o preenchimento da plataforma saber do governo do estado da Paraíba.",
-  "version": "2018.4",
+  "short_name": "saber-pb",
+  "description": "Facilita o preenchimento da plataforma saber do governo do estado da Paraíba",
+  "version": "2018.4.1",
 
   "content_scripts": [
       {
