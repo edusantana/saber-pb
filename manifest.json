@@ -3,7 +3,7 @@
 
   "name": "Saber PB",
   "description": "Facilia o preenchimento da plataforma saber do governo do estado da Paraíba.",
-  "version": "1.0",
+  "version": "2018.4",
 
   "content_scripts": [
       {

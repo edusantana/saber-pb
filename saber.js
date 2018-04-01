@@ -53,13 +53,7 @@ function atualizaRegistroDeFrequencia(){
         document.getElementById('class_frequency_day').value = valores[0];    
     }
     if (valores.length > 1){
-        document.getElementById('class_frequency_started_at').value = valores[1];
-    }
-    if (valores.length > 2){
-        document.getElementById('class_frequency_finished_at').value = valores[2];
-    }
-    if (valores.length > 3){
-        document.getElementById('class_frequency_justification').value = valores[3];
+        document.getElementById('class_frequency_justification').value = valores[1];
     }    
     return;
 }
@@ -94,7 +88,7 @@ function atualizaRegistroDeAula(){
         document.getElementById('class_log_content').value = valores[2];
     }
     if (valores.length > 3){
-        document.getElementById('class_log_activity').value = valores[3];
+        document.getElementById('class_log_methodology').value = valores[3];
     }
     return;
 }
