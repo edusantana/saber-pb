@@ -58,13 +58,17 @@ function atualizaRegistroDeFrequencia(){
     return;
 }
 
-if (window.location.pathname.includes("class_frequencies") && 
-    (window.location.pathname.includes("/new") || window.location.pathname.includes("/edit"))
-    ){
-    console.log('Adicionando input de registro de frequência')    
-    colagem.addEventListener("change", atualizaRegistroDeFrequencia);
-    breadcrumbs.appendChild(colagem); //appendChild
-    colagem.focus();
+if (window.location.pathname.includes("class_frequencies")){
+    if (window.location.pathname.includes("/new") || window.location.pathname.includes("/edit")){
+        console.log('Adicionando input de registro de frequência')    
+        colagem.addEventListener("change", atualizaRegistroDeFrequencia);
+        breadcrumbs.appendChild(colagem); //appendChild
+        colagem.focus();
+    } else {
+        console.log('Auto-seleção da caixa Número de aulas seguidas');
+        var numeroDeAulas = document.querySelector("#classes");
+        numeroDeAulas.focus();
+    }
 }
 /* =======================================================*/
 
