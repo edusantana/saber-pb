@@ -47,20 +47,20 @@ function atualizaRegistroDeFrequencia(){
     var valores = valor_colado.split("\t");
 
     console.log('Valores:' + valores);
-    
+
     // document.getElementById('class_frequency_day').value = '21/12/2017'
     if (valores.length > 0){
-        document.getElementById('class_frequency_day').value = valores[0];    
+        document.getElementById('class_frequency_day').value = valores[0];
     }
     if (valores.length > 1){
         document.getElementById('class_frequency_justification').value = valores[1];
-    }    
+    }
     return;
 }
 
 if (window.location.pathname.includes("class_frequencies")){
     if (window.location.pathname.includes("/new") || window.location.pathname.includes("/edit")){
-        console.log('Adicionando input de registro de frequência')    
+        console.log('Adicionando input de registro de frequência')
         colagem.addEventListener("change", atualizaRegistroDeFrequencia);
         breadcrumbs.appendChild(colagem); //appendChild
         colagem.focus();
@@ -81,9 +81,9 @@ function atualizaRegistroDeAula(){
     var valores = valor_colado.split("\t");
 
     console.log('Valores:' + valores);
-    
+
     if (valores.length > 0){
-        document.getElementById('class_log_day').value = valores[0];    
+        document.getElementById('class_log_day').value = valores[0];
     }
     if (valores.length > 1){
         document.getElementById('class_log_classes').value = valores[1];
@@ -97,10 +97,60 @@ function atualizaRegistroDeAula(){
     return;
 }
 
-if (window.location.pathname.includes("class_logs") && 
+if (window.location.pathname.includes("class_logs") &&
         (window.location.pathname.includes("/new") || window.location.pathname.includes("/edit"))){
-    console.log('Adicionando input de registro de aula')    
+    console.log('Adicionando input de registro de aula')
     colagem.addEventListener("change", atualizaRegistroDeAula);
+    breadcrumbs.appendChild(colagem); //appendChild
+    colagem.focus();
+}
+/* =======================================================*/
+
+/* ============== NOVA AVALIAÇÃO ===========================*/
+
+function atualizaRegistroDeaAvaliacao(){
+    console.log('Valor mudou!')
+    // dia: class_frequency[day]
+
+    var valor_colado = document.getElementById('colagem').value;
+    var valores = valor_colado.split("\t");
+
+    console.log('Valores:' + valores);
+
+    if (valores.length > 0){
+      document.getElementById('class_rating_bimester').selectedIndex = parseInt(valores[0])-1;
+    }
+    if (valores.length > 1){
+      document.getElementById('class_rating_day').value = valores[1];
+    }
+    if (valores.length > 2){
+      document.getElementById('class_rating_kind').selectedIndex = parseInt(valores[2])-1;
+    }
+    if (valores.length > 3){
+        document.getElementById('class_rating_class_rating_type_id').selectedIndex = parseInt(valores[3])-1;
+    }
+    if (valores.length > 4){
+      document.getElementById('class_rating_course_topic').value = valores[4];
+    }
+    if (valores.length > 5){
+
+      inputs = document.getElementsByClassName('students-ratings')[0].getElementsByTagName('input')
+      // Nota padrão
+      for(i=0; i<inputs.length; i++){
+        input = inputs[i]
+        if (input.type.endsWith("text")){
+          input.value = valores[5]
+        }
+      }
+    }
+
+    return;
+}
+
+if (window.location.pathname.includes("class_ratings") &&
+        (window.location.pathname.includes("/new") || window.location.pathname.includes("/edit"))){
+    console.log('Adicionando input de avaliação')
+    colagem.addEventListener("change", atualizaRegistroDeaAvaliacao);
     breadcrumbs.appendChild(colagem); //appendChild
     colagem.focus();
 }
