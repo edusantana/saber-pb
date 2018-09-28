@@ -37,6 +37,29 @@ colagem.cols = "100";
 colagem.rows = "4";
 colagem.placeholder = "Cole aqui as colunas copiadas do Excel, depois pressione TAB e ALT+s para salvar"
 
+var baixar_planilha_link = document.createElement("a");
+baixar_planilha_link.setAttribute('class', 'btn btn-info');
+baixar_planilha_link.setAttribute('title', 'Baixar planilha para facilitar edição');
+var icone = document.createElement("i");
+icone.setAttribute('class', 'icon-download-alt');
+baixar_planilha_link.appendChild(icone);
+
+var plugin_link = document.createElement("a");
+plugin_link.setAttribute('class', 'btn btn-info');
+plugin_link.setAttribute('title', 'Avaliar/Comentar plugin');
+plugin_link.setAttribute('href', 'https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem');
+var icone = document.createElement("i");
+icone.setAttribute('class', 'icon-comments-alt');
+plugin_link.appendChild(icone);
+
+
+/*
+Links das planilhas:
+https://github.com/edusantana/saber-pb/raw/master/frequencias.xlsx
+https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx
+https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx
+*/
+
 
 /* =========== REGISTRO DE FREQUÊNCIA  ==================*/
 function atualizaRegistroDeFrequencia(){
@@ -64,6 +87,10 @@ if (window.location.pathname.includes("class_frequencies")){
         colagem.addEventListener("change", atualizaRegistroDeFrequencia);
         breadcrumbs.appendChild(colagem); //appendChild
         colagem.focus();
+        baixar_planilha_link.setAttribute('href', 'https://github.com/edusantana/saber-pb/raw/master/frequencias.xlsx');
+        breadcrumbs.appendChild(baixar_planilha_link);
+        breadcrumbs.appendChild(plugin_link);
+
     } else {
         console.log('Auto-seleção da caixa Número de aulas seguidas');
         var numeroDeAulas = document.querySelector("#classes");
@@ -103,6 +130,10 @@ if (window.location.pathname.includes("class_logs") &&
     colagem.addEventListener("change", atualizaRegistroDeAula);
     breadcrumbs.appendChild(colagem); //appendChild
     colagem.focus();
+    baixar_planilha_link.setAttribute('href', 'https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx');
+    breadcrumbs.appendChild(baixar_planilha_link);
+    breadcrumbs.appendChild(plugin_link);
+
 }
 /* =======================================================*/
 
@@ -152,6 +183,9 @@ if (window.location.pathname.includes("class_ratings") &&
     console.log('Adicionando input de avaliação')
     colagem.addEventListener("change", atualizaRegistroDeaAvaliacao);
     breadcrumbs.appendChild(colagem); //appendChild
+    baixar_planilha_link.setAttribute('href', 'https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx');
+    breadcrumbs.appendChild(baixar_planilha_link);
+    breadcrumbs.appendChild(plugin_link);
     colagem.focus();
 }
 /* =======================================================*/

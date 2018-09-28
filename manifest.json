@@ -3,8 +3,8 @@
 
   "name": "Saber PB",
   "short_name": "saber-pb",
-  "description": "Facilita o preenchimento da plataforma saber do governo do estado da Paraíba. Consule https://github.com/edusantana/saber-pb para mais informações.",
-  "version": "2018.9.1",
+  "description": "Facilita o preenchimento da plataforma saber do governo do estado da Paraíba. Consule https://github.com/edusantana/saber-pb",
+  "version": "2018.9.2",
 
   "content_scripts": [
       {
