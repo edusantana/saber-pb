@@ -163,8 +163,8 @@ function atualizaRegistroDeaAvaliacao(){
     if (valores.length > 4){
       document.getElementById('class_rating_course_topic').value = valores[4];
     }
-    if (valores.length > 5){
-
+    if (valores.length > 5)
+{
       inputs = document.getElementsByClassName('students-ratings')[0].getElementsByTagName('input')
       // Nota padrão
       for(i=0; i<inputs.length; i++){
@@ -178,11 +178,103 @@ function atualizaRegistroDeaAvaliacao(){
     return;
 }
 
+var legenda = document.getElementsByClassName("legend")[0]
+var notas_ext_div = document.createElement("div");
+var notas = document.createElement("textarea");
+notas.id = "notasTextArea";
+notas.placeholder = "Cole aqui as novas notas copiadas do Excel, depois pressione TAB para atualizá-las."
+notas.rows = "4";
+var nomes = document.createElement("textarea");
+nomes.rows = "4";
+nomes.title = "Copie essas notas e cole no Excel."
+nomes.disabled = true;
+
+function criarCamposNotas(){
+	//notas.addEventListener("change", atualizaNotas);
+	
+	var span_notas = document.createElement("div");
+	var nomes_div  = document.createElement("div");
+	span_notas.className = "span3"
+	span_notas.appendChild(notas);
+	span_notas.disabled = false;
+	nomes_div.className = "span3";
+	nomes_div.appendChild(nomes);
+	notas.className = "input-block-level"
+	
+	var estudantes_notas = document.getElementsByClassName('students-ratings')[0]
+	var aondeIncluir = document.getElementsByClassName('students-ratings')[0].previousElementSibling
+	var divExterno= document.createElement("div");
+	divExterno.id="DivParaNotas"
+	//estudantes_notas.appendChild(divExterno);
+	estudantes_notas.insertBefore(divExterno, estudantes_notas.childNodes[0]);
+	//aondeIncluir.insertBefore(divExterno, aondeIncluir) 
+	divExterno.insertAdjacentHTML('beforeend', '<div class="row-fluid"><div id="idnotas_ext_div" class="row"><div class="col span8" id="nomesTextDiv"></div><div class="col span4" id="notasTextDiv"></div> </div></div>');
+	
+	//nomes.attr("disabled","disabled");
+	
+	document.getElementById("nomesTextDiv").appendChild(nomes);
+	document.getElementById("notasTextDiv").appendChild(notas);
+	
+	
+
+	var estudantes_notas = document.getElementsByClassName('students-ratings')[0]
+	var alunos = estudantes_notas.getElementsByClassName('span8')
+	var notas4= estudantes_notas.getElementsByClassName('span4')
+	
+	for(i=1; i<alunos.length; i++){
+		var aluno = alunos[i].textContent.trim() 
+		var nota = notas4[i].children[0].value
+
+		//console.log(aluno + '\t' + nota);
+		nomes.value += aluno + '\t' + nota + "\n";
+	}
+	console.log('Notas: \n' +nomes.value );
+	
+
+    var inputs = document.getElementsByClassName('students-ratings')[0].getElementsByTagName('input')
+    console.log('Notas:');
+    // Nota padrão
+    for(i=0; i<inputs.length; i++){
+      input = inputs[i]
+      if (input.type.endsWith("text")){
+        //input.value = valores[5]
+        //console.log(input.value);
+      }
+    }
+
+    notas.addEventListener("change", atualizaNotas);
+	
+}
+	
+
+function atualizaNotas(){
+	console.log('O campo Notas mudou!');
+	var valor_colado = document.getElementById('notasTextArea').value;
+    var valores = valor_colado.split("\n");
+    vi = 0;
+
+    var inputs = document.getElementsByClassName('students-ratings')[0].getElementsByTagName('input')
+    console.log('Notas:');
+    // Nota padrão
+    for(i=0; (i<inputs.length); i++){
+      input = inputs[i]
+      if (input.type.endsWith("text")){
+    	nome_nota= valores[vi].split("\t");
+        input.value = nome_nota[1];
+        vi++;
+        //console.log(input.value);
+      }
+    }
+
+}
+
 if (window.location.pathname.includes("class_ratings") &&
         (window.location.pathname.includes("/new") || window.location.pathname.includes("/edit"))){
     console.log('Adicionando input de avaliação')
     colagem.addEventListener("change", atualizaRegistroDeaAvaliacao);
+    
     breadcrumbs.appendChild(colagem); //appendChild
+    criarCamposNotas();
     baixar_planilha_link.setAttribute('href', 'https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx');
     breadcrumbs.appendChild(baixar_planilha_link);
     breadcrumbs.appendChild(plugin_link);
