@@ -184,6 +184,7 @@ var notas = document.createElement("textarea");
 notas.id = "notasTextArea";
 notas.placeholder = "Cole aqui as novas notas copiadas do Excel, depois pressione TAB para atualizá-las."
 notas.rows = "4";
+notas.style="width:100%;"
 var nomes = document.createElement("textarea");
 nomes.rows = "4";
 nomes.title = "Copie essas notas e cole no Excel."
@@ -197,7 +198,7 @@ function criarCamposNotas(){
 	span_notas.className = "span3"
 	span_notas.appendChild(notas);
 	span_notas.disabled = false;
-	nomes_div.className = "span3";
+	nomes_div.cnlassName = "span3";
 	nomes_div.appendChild(nomes);
 	notas.className = "input-block-level"
 	
@@ -224,11 +225,11 @@ function criarCamposNotas(){
 	for(i=1; i<alunos.length; i++){
 		var aluno = alunos[i].textContent.trim() 
 		var nota = notas4[i].children[0].value
-
+		
 		//console.log(aluno + '\t' + nota);
 		nomes.value += aluno + '\t' + nota + "\n";
 	}
-	console.log('Notas: \n' +nomes.value );
+	console.log('Notas dos alunos: \n' +nomes.value );
 	
 
     var inputs = document.getElementsByClassName('students-ratings')[0].getElementsByTagName('input')
@@ -260,7 +261,11 @@ function atualizaNotas(){
       input = inputs[i]
       if (input.type.endsWith("text")){
     	nome_nota= valores[vi].split("\t");
-        input.value = nome_nota[1];
+		if (nome_nota[1] === ("10")){
+			input.value = "10,0";
+		}else{
+			input.value = nome_nota[1];
+		}
         vi++;
         //console.log(input.value);
       }
