@@ -11,9 +11,18 @@ var links = document.getElementsByTagName('a');
 for(i=0; i<links.length; i++){
     if (links[i].href.endsWith("/new")){
         links[i].accessKey='n';
-        links[i].title='Tecla de atalho adicionada: Alt+n';
+        links[i].title='Tecla de atalho adicionada: ALT+n';
     }
 }
+
+// Adicionando tecla de atalho ALT+f ao botão de quantidade de aulas seguidas
+var botaoClasses = document.getElementById("classes")
+if(botaoClasses != null){
+	console.log('Tecla ALT+A adicionada ap botão de número de aulas seguidas!')
+	botaoClasses.accessKey='a';
+	botaoClasses.title='Tecla de atalho adicionada: ALT+a';	
+}
+
 
 // Adicionar tecla de atalho ALT+s para salvar
 var botoes = document.getElementsByTagName('button');
@@ -21,11 +30,11 @@ for(i=0; i<botoes.length; i++){
     b = botoes[i]
     if (b.textContent.endsWith("Salvar")){
         b.accessKey='s';
-        b.title='Tecla de atalho adicionada: Alt+s';
+        b.title='Tecla de atalho adicionada: ALT+s';
     }
     if (b.textContent.includes("Adicionar")){
         b.accessKey='n';
-        b.title='Tecla de atalho adicionada: Alt+n';
+        b.title='Tecla de atalho adicionada: ALT+n';
     }
 }
 
@@ -81,6 +90,24 @@ function atualizaRegistroDeFrequencia(){
     return;
 }
 
+function corrigeOsNaoRegistrados(){
+	console.log("Verificando por erros...")
+	var frequencias = document.getElementsByClassName('students-frequencies')
+    var erros = frequencias[0].getElementsByClassName("alert alert-error clearfix")
+    if (erros!=null){
+    	
+    	for(i=0; i<erros.length; i++){
+    		console.log("Corrigindo erro: " + i)
+    		// Seleciona automaticamente "Não registrado"
+    		erros[i].parentElement.parentElement.getElementsByTagName("input")[4].checked = true
+
+    		var aviso = document.createTextNode("Selecionando 'Não registrado' automaticamente para você. (Extensão saber-pb)");
+    		erros[i].parentElement.appendChild(aviso);
+    	}
+    }
+	
+}
+
 if (window.location.pathname.includes("class_frequencies")){
     if (window.location.pathname.includes("/new") || window.location.pathname.includes("/edit")){
         console.log('Adicionando input de registro de frequência')
@@ -90,11 +117,18 @@ if (window.location.pathname.includes("class_frequencies")){
         baixar_planilha_link.setAttribute('href', 'https://github.com/edusantana/saber-pb/raw/master/frequencias.xlsx');
         breadcrumbs.appendChild(baixar_planilha_link);
         breadcrumbs.appendChild(plugin_link);
+        
+        
 
     } else {
         console.log('Auto-seleção da caixa Número de aulas seguidas');
         var numeroDeAulas = document.querySelector("#classes");
-        numeroDeAulas.focus();
+        if (numeroDeAulas!=null){
+        	numeroDeAulas.focus();        	
+        }else{
+        	// Corrigindo erros
+        	corrigeOsNaoRegistrados();        	
+        }
     }
 }
 /* =======================================================*/
@@ -187,8 +221,9 @@ notas.rows = "4";
 notas.style="width:100%;"
 var nomes = document.createElement("textarea");
 nomes.rows = "4";
-nomes.title = "Copie essas notas e cole no Excel."
+nomes.title = "Copie essas notas e cole no Excel. Click, CTRL+A, CTRL+C. Abra o excel e CTRL+V."
 nomes.disabled = true;
+nomes.style="width:100%;"
 
 function criarCamposNotas(){
 	//notas.addEventListener("change", atualizaNotas);
