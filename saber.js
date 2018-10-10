@@ -134,6 +134,39 @@ if (window.location.pathname.includes("class_frequencies")){
 /* =======================================================*/
 
 /* ============= REGISTRO DE AULA ========================*/
+function realcaDiasSemAulasNaTabela(){
+	let tbody = document.getElementsByTagName("tbody")[0];
+	
+	let dias_sem_aulas = ["27/09/2018", "13/09/2018"];
+	
+    for(i=0; i<tbody.children.length; i++){
+    	let tr = tbody.children[i]
+    	let dia = tr.firstElementChild.textContent; // data 
+    	
+    	for(j=0; j<dias_sem_aulas.length; j++){
+    		if (dia.includes(dias_sem_aulas[j])){
+    			// dia sem aula
+    			// realça problema na linha
+    			tr.className = tr.className + " alert alert-error"
+    			tr.title = "Esta data foi configurada como sem aula por você, verifique as opções da extensão."
+    			console.log(tr);
+    		}
+    	}
+    }
+}
+
+function temImpedimentoParaAData(dia){
+	var temImpedimento = false;
+	let dias_sem_aulas = ["27/09/2018", "13/09/2018"];
+	for(j=0; j<dias_sem_aulas.length; j++){
+		if (dia.includes(dias_sem_aulas[j])){
+			temImpedimento = true;
+			break;
+		}
+	}
+	return temImpedimento;
+}
+
 function atualizaRegistroDeAula(){
     console.log('Valor mudou!')
     // dia: class_frequency[day]
