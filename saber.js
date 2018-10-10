@@ -134,30 +134,15 @@ if (window.location.pathname.includes("class_frequencies")){
 /* =======================================================*/
 
 /* ============= REGISTRO DE AULA ========================*/
-function realcaDiasSemAulasNaTabela(){
-	let tbody = document.getElementsByTagName("tbody")[0];
-	
-	let dias_sem_aulas = ["27/09/2018", "13/09/2018"];
-	
-    for(i=0; i<tbody.children.length; i++){
-    	let tr = tbody.children[i]
-    	let dia = tr.firstElementChild.textContent; // data 
-    	
-    	for(j=0; j<dias_sem_aulas.length; j++){
-    		if (dia.includes(dias_sem_aulas[j])){
-    			// dia sem aula
-    			// realça problema na linha
-    			tr.className = tr.className + " alert alert-error"
-    			tr.title = "Esta data foi configurada como sem aula por você, verifique as opções da extensão."
-    			console.log(tr);
-    		}
-    	}
-    }
-}
-
-function temImpedimentoParaAData(dia){
+/**
+ * Ler das configurações se tem dias sem aulas
+ * fix, o ideal seria async para ler de opções
+ * me odeio por esse código.
+ * @param dia
+ * @returns
+ */
+function temImpedimentoParaAData(dia, dias_sem_aulas){
 	var temImpedimento = false;
-	let dias_sem_aulas = ["27/09/2018", "13/09/2018"];
 	for(j=0; j<dias_sem_aulas.length; j++){
 		if (dia.includes(dias_sem_aulas[j])){
 			temImpedimento = true;
@@ -166,6 +151,62 @@ function temImpedimentoParaAData(dia){
 	}
 	return temImpedimento;
 }
+
+/**
+ * Ler datas sem aulas de opções da extensão
+ * @returns
+ */
+function realcaDiasSemAulasNaTabela(){
+
+  chrome.storage.sync.get('feriados', function(data) {
+  	var dias_sem_aulas = data.feriados.split("\n");
+  	console.log("Configuração de dias sem aulas: '" + dias_sem_aulas+"'");
+  	
+  	if (dias_sem_aulas.length == 1){
+  		if (dias_sem_aulas[0] == ""){
+  			dias_sem_aulas = []
+  		}
+  	}
+  	
+  	if (dias_sem_aulas.length >= 1){
+  	  	
+  	  	if (document.getElementsByTagName("tbody").length > 0){
+  	  		console.log("Configuração de dias sem aulas: '" + dias_sem_aulas+"'");
+  	  		let tbody = document.getElementsByTagName("tbody")[0];
+  	  		
+  	  	    for(i=0; i<tbody.children.length; i++){
+  	  	    	let tr = tbody.children[i]
+  	  	    	let dia = tr.firstElementChild.textContent; // data
+  	  	    	
+  	  	    	if(temImpedimentoParaAData(dia, dias_sem_aulas)){
+  	  	    		// dia sem aula
+  	  	    		// realça problema na linha
+  	  	    		tr.className = tr.className + " alert alert-error"
+  	  	    		tr.title = "Esta data foi configurada como sem aula por você, verifique as opções da extensão."
+  	  	    		console.log("Identificado atividade em data configurada como sem aula: " + dia);
+  	  	    	}
+  	  	    }	  	  	  		
+  	  	}else{
+  	  		// Não tem registros cadastrados.
+  	  	}
+  	  	
+  	}else{
+  		// não tem dias impeditivos cadastrados
+  	}
+  	
+  });
+}
+
+
+if (window.location.pathname.endsWith("class_logs")
+		|| window.location.pathname.endsWith("class_frequencies")
+		|| window.location.pathname.endsWith("occurrences")
+		|| window.location.pathname.endsWith("class_ratings")
+		) {
+	realcaDiasSemAulasNaTabela();
+}
+
+
 
 function atualizaRegistroDeAula(){
     console.log('Valor mudou!')
@@ -196,6 +237,9 @@ if (window.location.pathname.includes("class_logs") &&
     console.log('Adicionando input de registro de aula')
     colagem.addEventListener("change", atualizaRegistroDeAula);
     breadcrumbs.appendChild(colagem); //appendChild
+    if(window.location.pathname.includes("/new")){
+    	atualizaColagemAPartirDoPrimeiroRegistroDaSerie()
+    }
     colagem.focus();
     baixar_planilha_link.setAttribute('href', 'https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx');
     breadcrumbs.appendChild(baixar_planilha_link);
@@ -284,8 +328,6 @@ function criarCamposNotas(){
 	document.getElementById("nomesTextDiv").appendChild(nomes);
 	document.getElementById("notasTextDiv").appendChild(notas);
 	
-	
-
 	var estudantes_notas = document.getElementsByClassName('students-ratings')[0]
 	var alunos = estudantes_notas.getElementsByClassName('span8')
 	var notas4= estudantes_notas.getElementsByClassName('span4')
@@ -297,7 +339,7 @@ function criarCamposNotas(){
 		//console.log(aluno + '\t' + nota);
 		nomes.value += aluno + '\t' + nota + "\n";
 	}
-	console.log('Notas dos alunos: \n' +nomes.value );
+	//console.log('Notas dos alunos: \n' +nomes.value );
 	
 
     var inputs = document.getElementsByClassName('students-ratings')[0].getElementsByTagName('input')
@@ -352,5 +394,44 @@ if (window.location.pathname.includes("class_ratings") &&
     breadcrumbs.appendChild(baixar_planilha_link);
     breadcrumbs.appendChild(plugin_link);
     colagem.focus();
+    
+    if(window.location.pathname.includes("/new")){
+    	atualizaColagemAPartirDoPrimeiroRegistroDaSerie();
+    }
+
 }
 /* =======================================================*/
+
+
+function atualizaColagemAPartirDoPrimeiroRegistroDaSerie(){
+	chrome.storage.sync.get({
+		registros: ''
+	}, function(items) {
+	    //var valor_colado = document.getElementById('colagem').value;
+	    //var valores = valor_colado.split("\t");
+
+		console.log("Registros atuais: " + items.registros)
+	    if (items.registros != ''){
+	    	let registros = items.registros.split("\n");
+	    	console.log("Quantidade de registros: " + registros.length);
+	    	let registro = registros.shift();
+	    	console.log("Dados para o novo registro: " + registro);
+	    	colagem.value = registro;
+	    	colagem.dispatchEvent(new Event('change'));
+	    	
+	    	var registrosAtualizado = registros.join("\n");
+	    	
+	    	chrome.storage.sync.set({
+	    		registros: registrosAtualizado
+	    	}, function() {
+	    		console.log("Registros atualizados");
+	    		console.log("Atualizando registros com: " + registrosAtualizado);
+	    	});
+	    	
+	    }
+	    
+		
+		//document.getElementById('color').value = items.favoriteColor;
+//		document.getElementById('like').checked = items.likesColor;
+	});
+}
