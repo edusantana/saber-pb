@@ -90,6 +90,10 @@ function atualizaRegistroDeFrequencia(){
     return;
 }
 
+/**
+ * Auto selecina a opção 'Não registrado' para os alunos com problemas
+ * @returns
+ */
 function corrigeOsNaoRegistrados(){
 	console.log("Verificando por erros...")
 	var frequencias = document.getElementsByClassName('students-frequencies')
@@ -114,12 +118,12 @@ if (window.location.pathname.includes("class_frequencies")){
         colagem.addEventListener("change", atualizaRegistroDeFrequencia);
         breadcrumbs.appendChild(colagem); //appendChild
         colagem.focus();
+        if(window.location.pathname.includes("/new")){
+        	atualizaColagemAPartirDoPrimeiroRegistroDaSerie()
+        }        
         baixar_planilha_link.setAttribute('href', 'https://github.com/edusantana/saber-pb/raw/master/frequencias.xlsx');
         breadcrumbs.appendChild(baixar_planilha_link);
         breadcrumbs.appendChild(plugin_link);
-        
-        
-
     } else {
         console.log('Auto-seleção da caixa Número de aulas seguidas');
         var numeroDeAulas = document.querySelector("#classes");
