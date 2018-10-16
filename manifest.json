@@ -2,8 +2,8 @@
 	"manifest_version": 2,
 	"name": "Saber PB",
 	"short_name": "saber-pb",
-	"description": "Facilita o preenchimento da plataforma saber do governo do estado da Paraíba. Consule https://github.com/edusantana/saber-pb",
-	"version": "2018.10.4",
+	"description": "Facilita o preenchimento da plataforma saber do governo do estado da Paraíba. Assita https://www.youtube.com/watch?v=R_0gQxTHqbg",
+	"version": "2018.10.6",
 	"permissions": [
 		"storage"
 	],
@@ -17,5 +17,5 @@
 				"saber.js"
 			]
 		}
-	]
+	]	
 }

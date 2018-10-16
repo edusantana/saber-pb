@@ -163,40 +163,43 @@ function temImpedimentoParaAData(dia, dias_sem_aulas){
 function realcaDiasSemAulasNaTabela(){
 
   chrome.storage.sync.get('feriados', function(data) {
-  	var dias_sem_aulas = data.feriados.split("\n");
-  	console.log("Configuração de dias sem aulas: '" + dias_sem_aulas+"'");
-  	
-  	if (dias_sem_aulas.length == 1){
-  		if (dias_sem_aulas[0] == ""){
-  			dias_sem_aulas = []
-  		}
-  	}
-  	
-  	if (dias_sem_aulas.length >= 1){
-  	  	
-  	  	if (document.getElementsByTagName("tbody").length > 0){
-  	  		console.log("Configuração de dias sem aulas: '" + dias_sem_aulas+"'");
-  	  		let tbody = document.getElementsByTagName("tbody")[0];
-  	  		
-  	  	    for(i=0; i<tbody.children.length; i++){
-  	  	    	let tr = tbody.children[i]
-  	  	    	let dia = tr.firstElementChild.textContent; // data
-  	  	    	
-  	  	    	if(temImpedimentoParaAData(dia, dias_sem_aulas)){
-  	  	    		// dia sem aula
-  	  	    		// realça problema na linha
-  	  	    		tr.className = tr.className + " alert alert-error"
-  	  	    		tr.title = "Esta data foi configurada como sem aula por você, verifique as opções da extensão."
-  	  	    		console.log("Identificado atividade em data configurada como sem aula: " + dia);
-  	  	    	}
-  	  	    }	  	  	  		
-  	  	}else{
-  	  		// Não tem registros cadastrados.
-  	  	}
-  	  	
-  	}else{
-  		// não tem dias impeditivos cadastrados
-  	}
+	if (data.feriados!=null){
+	  	var dias_sem_aulas = data.feriados.split("\n");
+	  	console.log("Configuração de dias sem aulas: '" + dias_sem_aulas+"'");
+	  	
+	  	if (dias_sem_aulas.length == 1){
+	  		if (dias_sem_aulas[0] == ""){
+	  			dias_sem_aulas = []
+	  		}
+	  	}
+	  	
+	  	if (dias_sem_aulas.length >= 1){
+	  	  	
+	  	  	if (document.getElementsByTagName("tbody").length > 0){
+	  	  		console.log("Configuração de dias sem aulas: '" + dias_sem_aulas+"'");
+	  	  		let tbody = document.getElementsByTagName("tbody")[0];
+	  	  		
+	  	  	    for(i=0; i<tbody.children.length; i++){
+	  	  	    	let tr = tbody.children[i]
+	  	  	    	let dia = tr.firstElementChild.textContent; // data
+	  	  	    	
+	  	  	    	if(temImpedimentoParaAData(dia, dias_sem_aulas)){
+	  	  	    		// dia sem aula
+	  	  	    		// realça problema na linha
+	  	  	    		tr.className = tr.className + " alert alert-error"
+	  	  	    		tr.title = "Esta data foi configurada como sem aula por você, verifique as opções da extensão."
+	  	  	    		console.log("Identificado atividade em data configurada como sem aula: " + dia);
+	  	  	    	}
+	  	  	    }	  	  	  		
+	  	  	}else{
+	  	  		// Não tem registros cadastrados.
+	  	  	}
+	  	  	
+	  	}else{
+	  		// não tem dias impeditivos cadastrados
+	  	}
+		
+	}
   	
   });
 }
@@ -433,9 +436,5 @@ function atualizaColagemAPartirDoPrimeiroRegistroDaSerie(){
 	    	});
 	    	
 	    }
-	    
-		
-		//document.getElementById('color').value = items.favoriteColor;
-//		document.getElementById('like').checked = items.likesColor;
 	});
 }

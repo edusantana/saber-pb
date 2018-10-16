@@ -36,5 +36,13 @@ function restore_options() {
 	});
 }
 
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+    for (key in changes) {
+    	if (key == "registros"){
+    		restore_options();
+    	}
+    }
+  });
+
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click', save_options);
