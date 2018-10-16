@@ -2,8 +2,8 @@
 	"manifest_version": 2,
 	"name": "Saber PB",
 	"short_name": "saber-pb",
-	"description": "Facilita o preenchimento da plataforma saber do governo do estado da Paraíba. Assita https://www.youtube.com/watch?v=R_0gQxTHqbg",
-	"version": "2018.10.6",
+	"description": "Auxilia os professores do governo do estado da Paraíba agilizando a edicação da plataforma do saber.",
+	"version": "2018.10.7",
 	"permissions": [
 		"storage"
 	],

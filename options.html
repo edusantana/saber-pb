@@ -14,31 +14,32 @@
 
 	<textarea id="feriados" name="feriados" cols="20" rows="6" title="Informe os dias que deseja ser lembrado que não podem haver registros de aulas."></textarea><br>
 	
-	 Inclua zeros pois todos os dias e meses devem ter 2 dígitos, ex: 01/05/2018):
+	 Inclua zeros pois todos os dias e meses devem ter 2 dígitos, ex: 01/05/2018
 
 	<br>
 	<h2>Cadastros em séries</h2>
-	<div>
-		<textarea id="registros" name="registros" cols="120" rows="12" title="Cole aqui várias linhas copiadas de uma planilha" style="width: 90%"></textarea><br>
-		<div style="text-align: center"><i><a href="https://youtu.be/SvW031kZcmg"><img src="https://www.iconfinder.com/icons/571117/download/png/24"/> Assistir vídeo que ensina utilizar esse recurso</a></i></div>
+	<div style="">
+		<textarea id="registros" name="registros" cols="120" rows="12" title="Cole aqui várias linhas copiadas de uma planilha" style="width: 100%"></textarea><br>
+		<div style="text-align: center;"><i><a href="https://youtu.be/SvW031kZcmg">Assistir vídeo sobre esse recurso: Cadastros em série</a></i></div>
 	</div>
 	
-<!--  	
-	Favorite color:
-	<select id="color">
-		<option value="red">red</option>
-		<option value="green">green</option>
-		<option value="blue">blue</option>
-		<option value="yellow">yellow</option>
-	</select>
-
-	<label> <input type="checkbox" id="like"> I like
-		colors.
-	</label>
--->
 	<div id="status"></div>
-	<button id="save" accessKey="s" title="ALT+s para salvar">Salvar</button>
+	<div style="margin-top: 10px;">
+		<button id="save" accessKey="s" title="ALT+s para salvar">Salvar</button>
+	</div>
 
+	<div id="doar" style="margin-top: 20px; text-align: center">
+		<!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+		<form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post">
+		<!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
+		<input type="hidden" name="currency" value="BRL" />
+		<input type="hidden" name="receiverEmail" value="eduardo.ufpb@gmail.com" />
+		<input type="hidden" name="iot" value="button" />
+		<input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/doacoes/205x30-doar.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+		</form>
+		<!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
+	</div>
 	<script src="options.js"></script>
+	
 </body>
 </html>
