@@ -1,9 +1,10 @@
 {
 	"manifest_version": 2,
+	"version": "2020.04.05",
 	"name": "Saber PB",
 	"short_name": "saber-pb",
 	"description": "Auxilia os professores do governo do estado da Paraíba agilizando a edicação da plataforma do saber.",
-	"version": "2020.04.05",
+	"homepage_url" : "https://github.com/edusantana/saber-pb",
 	"permissions": [
 		"storage"
 	],
