@@ -3,7 +3,7 @@
 	"name": "Saber PB",
 	"short_name": "saber-pb",
 	"description": "Auxilia os professores do governo do estado da Paraíba agilizando a edicação da plataforma do saber.",
-	"version": "2018.11.1",
+	"version": "2020.04.05",
 	"permissions": [
 		"storage"
 	],
