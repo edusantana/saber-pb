@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="128"
+   height="128"
+   viewBox="0 0 384 384"
+   version="1.1"
+   id="svg70"
+   sodipodi:docname="saber-pb.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata76">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Bandeira da Paraíba&quot;</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs74" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1533"
+     inkscape:window-height="845"
+     id="namedview72"
+     showgrid="false"
+     inkscape:zoom="3.844226"
+     inkscape:cx="114.67798"
+     inkscape:cy="57.320768"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg70" />
+  <title
+     id="title63">Bandeira da Paraíba&quot;</title>
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot82"
+     style="font-style:normal;font-weight:normal;font-size:120px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:3"
+     transform="matrix(0.125,0,0,0.125,237.3523,171.36173)"><flowRegion
+       id="flowRegion84"
+       style="stroke-width:3"><rect
+         id="rect86"
+         width="151.89874"
+         height="144.99425"
+         x="2105.8689"
+         y="1514.1543"
+         style="stroke-width:9" /></flowRegion><flowPara
+       id="flowPara88"
+       style="stroke-width:3"></flowPara></flowRoot>  <rect
+     style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:42.92743301;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect100"
+     width="144"
+     height="384"
+     x="0"
+     y="0" />
+  <rect
+     y="0"
+     x="144"
+     height="384"
+     width="240"
+     id="rect907"
+     style="opacity:1;fill:#f00000;fill-opacity:1;stroke:none;stroke-width:55.41907883;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <g
+     id="g941"
+     transform="translate(0,-14.050896)">
+    <text
+       id="text80"
+       y="239.43164"
+       x="10.916016"
+       style="font-style:normal;font-weight:normal;font-size:120px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:3"
+       xml:space="preserve"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Impact;-inkscape-font-specification:Impact;letter-spacing:6px;fill:#ffffff;stroke-width:3"
+         y="239.43164"
+         x="10.916016"
+         id="tspan78"
+         sodipodi:role="line">SABER</tspan></text>
+    <rect
+       y="244.5531"
+       x="13.266649"
+       height="24.972519"
+       width="326.20352"
+       id="rect917"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:45.03228378;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <path
+       id="rect928"
+       transform="scale(3)"
+       d="m 48,81.517578 v 8.324219 h 65.15625 v -8.324219 z"
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:18.47302628;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+    <path
+       id="rect933"
+       transform="scale(3)"
+       d="m 4.421875,81.517578 v 8.324219 H 48 v -8.324219 z"
+       style="opacity:1;fill:#f00000;fill-opacity:1;stroke:none;stroke-width:14.30914402;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
