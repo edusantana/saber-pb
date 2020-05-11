@@ -69,6 +69,67 @@ https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx
 https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx
 */
 
+function criaPainelSerie(){
+  var painel = document.createElement('div');
+  Object.assign(painel, {
+    className: 'container',
+    id: 'extensao-saber-pb'
+  });
+
+  var row = document.createElement('div');
+  Object.assign(row, {
+    className: 'row'
+  });
+  painel.appendChild(row);
+
+  var div_registros = document.createElement('div');
+  Object.assign(div_registros, {
+    className: 'span10'
+  });
+  row.appendChild(div_registros);
+
+  // <textarea id="registros" name="registros" cols="120" rows="12" title="Cole aqui várias linhas copiadas de uma planilha" style="width: 100%"></textarea>
+  var registros = document.createElement('textarea');
+  Object.assign(registros, {
+    className: 'span10',
+    id: 'registros',
+    name:"registros",
+    rows:"4",
+    title:"Área de transferência",
+  });
+  div_registros.appendChild(registros);
+
+  var acoes = document.createElement('div');
+  Object.assign(acoes, {
+    className: 'span2 text-center',
+    id: 'acoes'
+  });
+  row.appendChild(acoes);
+
+  var bSalvar = document.createElement('button');
+  Object.assign(bSalvar, {
+    className: 'btn btn-primary',
+    textContent: 'Salvar'
+  });
+  acoes.appendChild(bSalvar);
+
+  // https://github.com/edusantana/saber-pb
+  var ajuda = document.createElement('a');
+  Object.assign(ajuda, {
+    className: 'btn btn-info',
+    href: 'https://github.com/edusantana/saber-pb',
+    textContent: 'Ajuda'
+  });
+  acoes.appendChild(ajuda);
+
+
+
+  // Adicionar no breadcrumbs
+  //document.querySelector('div.breadcrumbs').insertAfter(painel)
+  document.querySelector('div#body').before(painel);
+
+}
+
 
 /* =========== REGISTRO DE FREQUÊNCIA  ==================*/
 function atualizaRegistroDeFrequencia(){
@@ -229,6 +290,50 @@ if (window.location.pathname.endsWith("class_logs")
 	realcaDiasSemAulasNaTabela();
 }
 
+function tipoDaPagina() {
+  return "class_logs";
+}
+
+function lerDadosDoRegistro(registro, tipoDaPagina) {
+
+  var data = []
+
+  for (i of [0, 3, 5, 6]){
+    data.push(r.children[i].textContent.trim());
+  }
+
+  return data;
+}
+
+function updateClipboard(newClip) {
+  navigator.clipboard.writeText(newClip).then(function() {
+    console.log("Conteúdo copiado para área de transferência")
+  }, function() {
+    /* clipboard write failed */
+  });
+}
+
+
+function copiaPlanilha(){
+  // content class_logs row-fluid
+  // table
+  var registros = Array.from(document.querySelectorAll("table tbody tr")).reverse();
+  var tipoDaPagina = tipoDaPagina();
+  var planilha = []
+
+
+  // Registros de aula class_logs
+  for (r of registros.reverse()) {
+    var linha = lerDadosDoRegistro(r, tipoDaPagina)
+    console.log(linha);
+    planilha.push(linha)
+  }
+
+
+  var planilha_string="a\tb\nc\toi"
+  updateClipboard(planilha_string)
+
+}
 
 
 function atualizaRegistroDeAula(){
@@ -267,6 +372,8 @@ if (window.location.pathname.includes("class_logs") &&
     baixar_planilha_link.setAttribute('href', 'https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx');
     breadcrumbs.appendChild(baixar_planilha_link);
     breadcrumbs.appendChild(plugin_link);
+
+    // TODO: atualização valor padrão de aulas seguidas
 
 }
 /* =======================================================*/
