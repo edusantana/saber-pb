@@ -69,67 +69,135 @@ https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx
 https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx
 */
 
-function criaPainelSerie(){
+/* =========== PAINEL  ==================*/
+// Saves options to chrome.storage
+function save_options() {
+  console.log("Salvando registros");
+  var registros= document.getElementById('registros').value.trim();
+  chrome.storage.sync.set({
+    registros: registros,
+  }, function() {
+    // Update status to let user know options were saved.
+    document.querySelector('#alerta').innerHTML='<div class="alert alert-success">Salvo</div>'
+  });
+}
+
+function save_aulas_seguidas(){
+  console.log("Salvando Nº aulas seguidas");
+  var numeroDeAulas=document.getElementById('classes').value;
+  chrome.storage.sync.set({
+    aulas_seguidas: numeroDeAulas,
+  }, function() {
+    // Update status to let user know options were saved.
+    document.querySelector('#alerta').innerHTML=`<div class="alert alert-success">${numeroDeAulas} foi salvo como valor padrão para a caixa de Número de aulas seguidas.</div>`
+  });
+}
+
+function pegar_registros(){
+  console.log("Pegando registros");
+  //#body > tbody > tr
+  var registros = Array.from(document.querySelectorAll("table tbody tr"));
+  var planilha = []
+
+  // Registros de aula class_logs
+  for (r of registros.reverse()) {
+    let data = r.children[0].textContent.trim()
+    let n_aulas = r.children[3].textContent.trim()
+    let conteudo = r.children[5].textContent.trim()
+    let metodologia = r.children[6].textContent.trim()
+    var linha = [data,n_aulas,conteudo,metodologia].join("\t")
+    console.log(linha);
+    planilha.push(linha)
+  }
+
+  document.querySelector("#registros").value = planilha.join("\n");
+  save_options();
+}
+
+function criaPainel(){
+
+  // remove breadcrumbs
+  document.querySelector('body > div.breadcrumbs > div > ul').remove()
+
   var painel = document.createElement('div');
   Object.assign(painel, {
     className: 'container',
     id: 'extensao-saber-pb'
   });
 
-  var row = document.createElement('div');
-  Object.assign(row, {
-    className: 'row'
-  });
-  painel.appendChild(row);
+  let pegar_registros = window.location.pathname.endsWith("class_logs")?        `<li><a id="pegar-registros" href="#">Pegar registros</a></li><li class="divider"></li>`: ""
+  let numeroDeAulas   = window.location.pathname.endsWith("class_frequencies")? `<li><a id="salva-n-aulas" href="#">Nº de aulas seguidas</a></li><li class="divider"></li>`: ""
 
-  var div_registros = document.createElement('div');
-  Object.assign(div_registros, {
-    className: 'span10'
-  });
-  row.appendChild(div_registros);
-
-  // <textarea id="registros" name="registros" cols="120" rows="12" title="Cole aqui várias linhas copiadas de uma planilha" style="width: 100%"></textarea>
-  var registros = document.createElement('textarea');
-  Object.assign(registros, {
-    className: 'span10',
-    id: 'registros',
-    name:"registros",
-    rows:"4",
-    title:"Área de transferência",
-  });
-  div_registros.appendChild(registros);
-
-  var acoes = document.createElement('div');
-  Object.assign(acoes, {
-    className: 'span2 text-center',
-    id: 'acoes'
-  });
-  row.appendChild(acoes);
-
-  var bSalvar = document.createElement('button');
-  Object.assign(bSalvar, {
-    className: 'btn btn-primary',
-    textContent: 'Salvar'
-  });
-  acoes.appendChild(bSalvar);
-
-  // https://github.com/edusantana/saber-pb
-  var ajuda = document.createElement('a');
-  Object.assign(ajuda, {
-    className: 'btn btn-info',
-    href: 'https://github.com/edusantana/saber-pb',
-    textContent: 'Ajuda'
-  });
-  acoes.appendChild(ajuda);
-
-
+  painel.innerHTML = `
+    <div class="row">
+      <div class="span10">
+        <textarea class="span10" id="registros" name="registros" rows="4" title="Área de transferência"></textarea>
+      </div>
+      <div class="span2 text-left" id="acoes">
+        <div class="btn-group">
+          <button id="bSalvar" class="btn btn-primary" accesskey="s">Salvar</button>
+          <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              ${pegar_registros}
+              ${numeroDeAulas}
+              <li><a href="https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx">Planilha de aulas</a></li>
+              <li><a href="https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx">Planilha de avaliações</a></li>
+              <li class="divider"></li>
+              <li><a href="https://www.youtube.com/watch?v=R_0gQxTHqbg&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN">Vídeos</a></li>
+              <li><a href="https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem">Avaliar extensão</a></li>
+              <li><a href="https://edusantana.github.io/saber-pb/">Sobre</a></li>
+            </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="alerta">
+    </div>`;
 
   // Adicionar no breadcrumbs
-  //document.querySelector('div.breadcrumbs').insertAfter(painel)
-  document.querySelector('div#body').before(painel);
+  document.querySelector('div.breadcrumbs > div').appendChild(painel)
 
 }
 
+// Restores select box and checkbox state using the preferences
+// stored in chrome.storage.
+function restore_options() {
+	// Use default value color = 'red' and likesColor = true.
+	chrome.storage.sync.get({
+		//favoriteColor : 'red',
+		//likesColor : true,
+		registros: '',
+	}, function(items) {
+		document.getElementById('registros').value = items.registros;
+	});
+}
+
+
+if (window.location.pathname.endsWith("class_logs")
+		|| window.location.pathname.endsWith("class_frequencies")
+		|| window.location.pathname.endsWith("class_ratings")
+		) {
+	criaPainel();
+
+  document.querySelector('#bSalvar').addEventListener("click", save_options);
+
+  if (document.querySelector('#salva-n-aulas')){
+    document.querySelector('#salva-n-aulas').addEventListener("click", save_aulas_seguidas);
+  }
+  if (document.querySelector('#pegar-registros')){
+    document.querySelector('#pegar-registros').addEventListener("click", pegar_registros);
+  }
+
+  restore_options();
+  chrome.storage.onChanged.addListener(function(changes, namespace) {
+      for (key in changes) {
+      	if (key == "registros"){
+      		restore_options();
+      	}
+      }
+    });
+}
+
+/* =========== PAINEL FIM  ==================*/
 
 /* =========== REGISTRO DE FREQUÊNCIA  ==================*/
 function atualizaRegistroDeFrequencia(){
@@ -292,47 +360,6 @@ if (window.location.pathname.endsWith("class_logs")
 
 function tipoDaPagina() {
   return "class_logs";
-}
-
-function lerDadosDoRegistro(registro, tipoDaPagina) {
-
-  var data = []
-
-  for (i of [0, 3, 5, 6]){
-    data.push(r.children[i].textContent.trim());
-  }
-
-  return data;
-}
-
-function updateClipboard(newClip) {
-  navigator.clipboard.writeText(newClip).then(function() {
-    console.log("Conteúdo copiado para área de transferência")
-  }, function() {
-    /* clipboard write failed */
-  });
-}
-
-
-function copiaPlanilha(){
-  // content class_logs row-fluid
-  // table
-  var registros = Array.from(document.querySelectorAll("table tbody tr")).reverse();
-  var tipoDaPagina = tipoDaPagina();
-  var planilha = []
-
-
-  // Registros de aula class_logs
-  for (r of registros.reverse()) {
-    var linha = lerDadosDoRegistro(r, tipoDaPagina)
-    console.log(linha);
-    planilha.push(linha)
-  }
-
-
-  var planilha_string="a\tb\nc\toi"
-  updateClipboard(planilha_string)
-
 }
 
 
@@ -568,10 +595,12 @@ function atualizaColagemAPartirDoPrimeiroRegistroDaSerie(){
 function atualizaNumeroDeAulasEmSequencia(caixa){
   console.log("Iniciando atualizaNumeroDeAulasEmSequencia...");
 
-	chrome.storage.sync.get({
-		aulas_seguidas: '1'
-	}, function(items) {
-		console.log("Registros atuais: " + items)
+  chrome.storage.sync.get({
+    aulas_seguidas: '1'
+  }, function(items) {
+    console.log("Registros atuais: " + items)
     caixa.value = items.aulas_seguidas;
-	});
+  });
+
+
 }

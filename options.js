@@ -36,8 +36,6 @@ function restore_options() {
 		document.getElementById('registros').value = items.registros;
 		document.getElementById('aulas_seguidas').value = items.aulas_seguidas;
 
-		//document.getElementById('color').value = items.favoriteColor;
-//		document.getElementById('like').checked = items.likesColor;
 	});
 }
 
