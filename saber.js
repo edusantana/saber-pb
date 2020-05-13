@@ -145,7 +145,9 @@ function criaPainel(){
               <li class="divider"></li>
               <li><a href="https://www.youtube.com/watch?v=R_0gQxTHqbg&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN">Vídeos</a></li>
               <li><a href="https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem">Avaliar extensão</a></li>
-              <li><a href="https://edusantana.github.io/saber-pb/">Sobre</a></li>
+              <li class="divider"></li>
+              <li><a href="https://edusantana.github.io/saber-pb#sobre-a-ferramenta">Sobre</a></li>
+              <li><a href="https://edusantana.github.io/saber-pb#suporte">Suporte</a></li>
             </ul>
         </div>
       </div>

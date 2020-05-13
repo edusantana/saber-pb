@@ -1,12 +1,10 @@
 # Extensão saber-pb
 
-![](https://user-images.githubusercontent.com/3603111/81819442-b444bc00-9505-11ea-918d-19731d8c47c7.png) Extensão saber-pb para o Google Chrome
-
 Extensão para facilitar a vida dos professores ao cadastrar informações no site do saber do Governo do Estado da Paraíba.
 
 # Resumo executivo
 
-- A ferramenta é gratuita e segura (+200 usuários)
+- A ferramenta é gratuita e segura (+190 usuários)
 
 - Você pode instalar através [desse link, no Google Chrome Web Store](https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem?hl=pt-BR).
 
@@ -14,20 +12,17 @@ Extensão para facilitar a vida dos professores ao cadastrar informações no si
 
 # Sobre a ferramenta
 
+![](https://user-images.githubusercontent.com/3603111/81819442-b444bc00-9505-11ea-918d-19731d8c47c7.png)
+
 # Aprendendo a usar
 
 ## Vídeos
 
 - [Playlist oficial apresentando a ferramenta](https://www.youtube.com/watch?v=R_0gQxTHqbg&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN)
 
-Vídeos produzidos por outras pessoas:
-
-- [Se produzir me avise me adiciono aqui](mailto:eduardo.ufpb@gmail.com)
-
-
 ## Planilhas
 
-As seguintes planilhas estão mantidas para facilitar a manipulação dos registros no saber:
+As seguintes planilhas são mantidas para facilitar a manipulação dos registros no saber:
 
 - [Para registro de aulas (conteúdos e frequências)](https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx)
 - [Para registro de avaliações](https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx)
@@ -43,6 +38,10 @@ WhatsApp/Telefone: **(83) 98108-1977**.
 - Tornar o computador mais rápido
 - Desenvolvimento e manutenção de sistemas
 - Produção de livros (eternize quem você ama escrevendo um livro sobre a pessoa)
+
+# Avaliar a extensão
+
+Considere [deixar sua avaliação sobre a extensão na store](https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem).
 
 
 # Comentários

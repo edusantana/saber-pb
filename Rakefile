@@ -9,3 +9,7 @@ task :zip do
 end
 
 task :default => [:zip]
+
+rule '.svg' => ['.dot'] do |t|
+  sh "dot -Tsvg #{t.name.ext('.dot')} > #{t.name}"
+end
