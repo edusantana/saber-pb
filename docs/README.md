@@ -18,6 +18,19 @@ Extensão para facilitar a vida dos professores ao cadastrar informações no si
 
 ## Vídeos
 
+### Instalação e apresentação
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/R_0gQxTHqbg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/udoXOhkK174" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Como cadastrar vários registros
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SvW031kZcmg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
 ## Planilhas
 
 As seguintes planilhas estão mantidas para facilitar a manipulação dos registros no saber:
@@ -28,7 +41,7 @@ As seguintes planilhas estão mantidas para facilitar a manipulação dos regist
 
 # Suporte
 
-Caso necessite de suporte pode ligar para mim através do seguinte telefone: (83) 98108-1977.
+WhatsApp/Telefone: **(83) 98108-1977**.
 
 ## Outros serviços
 
