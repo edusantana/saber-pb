@@ -4,7 +4,7 @@ Extensão para facilitar a vida dos professores ao cadastrar informações no si
 
 # Resumo executivo
 
-- A ferramenta é gratuita e segura (+190 usuários)
+- A ferramenta é gratuita e segura (+199 usuários)
 
 - Você pode instalar através [desse link, no Google Chrome Web Store](https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem?hl=pt-BR).
 
@@ -13,6 +13,12 @@ Extensão para facilitar a vida dos professores ao cadastrar informações no si
 # Sobre a ferramenta
 
 ![](https://user-images.githubusercontent.com/3603111/81819442-b444bc00-9505-11ea-918d-19731d8c47c7.png)
+
+Esta ferramenta surgiu porque minha esposa odiava realizar os registros no [site do saber](http://www.saber.pb.gov.br/), atrasava o trabalho, e então passei a ajudá-la.
+
+Ao usar o sistema várias coisas me irritavam nele, então criei essa extensão para contornar as dificuldades e agilizar os cadastros. Pedi para ela compartilhar essa extensão com seus colegas professores, que também desejem ganhar tempo.
+
+Essa extensão é gratuita, meu presente para vocês. Caso desejem retribuir considerem contratar [um dos serviços que ofereço](#outros-serviços).
 
 # Aprendendo a usar
 
@@ -30,21 +36,21 @@ As seguintes planilhas são mantidas para facilitar a manipulação dos registro
 
 # Suporte
 
-WhatsApp/Telefone: **(83) 98108-1977**.
+WhatsApp/Telefone: **(83) 98108-1977**
+
+E-mail: eduardo.ufpb@gmail.com
 
 ## Outros serviços
 
 - Consultoria tecnológica
-- Tornar o computador mais rápido
+- Tornar o computador mais rápido (_manutenção em notebook_)
 - Desenvolvimento e manutenção de sistemas
-- Produção de livros (eternize quem você ama escrevendo um livro sobre a pessoa)
-
-# Avaliar a extensão
-
-Considere [deixar sua avaliação sobre a extensão na store](https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem).
-
+- Produção de livros (eternize um familiar que faleceu escrevendo em conjunto e publicando um livro sobre quem ama)
 
 # Comentários
+
+- [Sugerir melhoria](https://github.com/edusantana/saber-pb/issues/new)
+- [Avaliar a extensão](https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem)
 
 Se quiser, pode deixar seu comentário aqui.
 
