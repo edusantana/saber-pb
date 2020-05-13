@@ -101,11 +101,11 @@ function pegar_registros(){
 
   // Registros de aula class_logs
   for (r of registros.reverse()) {
-    let data = r.children[0].textContent.trim()
-    let n_aulas = r.children[3].textContent.trim()
-    let conteudo = r.children[5].textContent.trim()
-    let metodologia = r.children[6].textContent.trim()
-    var linha = [data,n_aulas,conteudo,metodologia].join("\t")
+    let data = r.children[0].textContent.trim();
+    let n_aulas = r.children[3].textContent.trim();
+    let conteudo = r.children[5].textContent.trim().replace(/\n/g, "/");
+    let metodologia = r.children[6].textContent.trim().replace(/\n/g, "/");
+    var linha = [data,n_aulas,conteudo,metodologia].join("\t");
     console.log(linha);
     planilha.push(linha)
   }
@@ -125,7 +125,7 @@ function criaPainel(){
     id: 'extensao-saber-pb'
   });
 
-  let pegar_registros = window.location.pathname.endsWith("class_logs")?        `<li><a id="pegar-registros" href="#">Pegar registros</a></li><li class="divider"></li>`: ""
+  let pegar_registros = window.location.pathname.endsWith("class_logs")?        `<li><a id="pegar-registros" href="#" accesskey="p">Pegar registros</a></li><li class="divider"></li>`: ""
   let numeroDeAulas   = window.location.pathname.endsWith("class_frequencies")? `<li><a id="salva-n-aulas" href="#">Nº de aulas seguidas</a></li><li class="divider"></li>`: ""
 
   painel.innerHTML = `

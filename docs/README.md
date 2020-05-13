@@ -1,9 +1,12 @@
-layout: default
-comments: true
-
 # saber-pb
 
-Extensão para o Google Chrome com melhorias para a plataforma do saber do governo do estado da Paraíba.
+Extensão para facilitar a vida dos professores ao utilizar o site do saber do Governo do Estado da Paraíba.
+
+# A instalação
+
+https://youtu.be/R_0gQxTHqbg?t=89
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/R_0gQxTHqbg?start=89" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Modelos de planilha
 
