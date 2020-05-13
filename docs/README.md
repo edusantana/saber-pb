@@ -48,7 +48,7 @@ E-mail: eduardo.ufpb@gmail.com
 - Consultoria tecnológica
 - Tornar o computador mais rápido (_manutenção em notebook_)
 - Desenvolvimento e manutenção de sistemas
-- Produção de livros (eternize um familiar que faleceu escrevendo em conjunto e publicando um livro sobre quem ama)
+- Produção de livros (eternize um familiar que faleceu, escreva em família e publique um livro sobre quem ama)
 
 # Comentários
 
