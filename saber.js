@@ -125,7 +125,7 @@ function criaPainel(){
     id: 'extensao-saber-pb'
   });
 
-  let pegar_registros = window.location.pathname.endsWith("class_logs")?        `<li><a id="pegar-registros" href="#" accesskey="p">Pegar registros</a></li><li class="divider"></li>`: ""
+  let pegar_registros = window.location.pathname.endsWith("class_logs")?        `<li><a id="pegar-registros" href="#" accesskey="c"><u>C</u>opiar registros</a></li><li class="divider"></li>`: ""
   let numeroDeAulas   = window.location.pathname.endsWith("class_frequencies")? `<li><a id="salva-n-aulas" href="#">Nº de aulas seguidas</a></li><li class="divider"></li>`: ""
 
   painel.innerHTML = `
@@ -135,7 +135,7 @@ function criaPainel(){
       </div>
       <div class="span2 text-left" id="acoes">
         <div class="btn-group">
-          <button id="bSalvar" class="btn btn-primary" accesskey="s">Salvar</button>
+          <button id="bSalvar" class="btn btn-primary" accesskey="s"><u>S</u>alvar</button>
           <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
             <ul class="dropdown-menu">
               ${pegar_registros}
@@ -144,10 +144,9 @@ function criaPainel(){
               <li><a href="https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx">Planilha de avaliações</a></li>
               <li class="divider"></li>
               <li><a href="https://www.youtube.com/watch?v=R_0gQxTHqbg&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN">Vídeos</a></li>
-              <li><a href="https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem">Avaliar extensão</a></li>
-              <li class="divider"></li>
-              <li><a href="https://edusantana.github.io/saber-pb#sobre-a-ferramenta">Sobre</a></li>
+              <li><a href="https://github.com/edusantana/saber-pb/issues/new">Sugerir melhoria</a></li>
               <li><a href="https://edusantana.github.io/saber-pb#suporte">Suporte</a></li>
+              <li><a href="https://edusantana.github.io/saber-pb">Ajuda</a></li>
             </ul>
         </div>
       </div>
