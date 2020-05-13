@@ -18,17 +18,11 @@ Extensão para facilitar a vida dos professores ao cadastrar informações no si
 
 ## Vídeos
 
-### Instalação e apresentação
+- [Playlist oficial apresentando a ferramenta](https://www.youtube.com/watch?v=R_0gQxTHqbg&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/R_0gQxTHqbg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+Vídeos produzidos por outras pessoas:
 
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/udoXOhkK174" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-### Como cadastrar vários registros
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/SvW031kZcmg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+- [Se produzir me avise me adiciono aqui](mailto:eduardo.ufpb@gmail.com)
 
 
 ## Planilhas
