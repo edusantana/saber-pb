@@ -8,23 +8,15 @@ Extensão para facilitar a vida dos professores ao cadastrar informações no si
 
 - Você pode instalar através [desse link, no Google Chrome Web Store](https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem?hl=pt-BR).
 
-- Para aprender a utilizar
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/R_0gQxTHqbg?start=89" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
-# Modelos de planilha
+# Planilhas
 
 Utilize as planilhas a seguir como modelo para manter seu registro pessoal de suas atividades:
 
-- [frequencias.xlsx](frequencias.xlsx)
-- [aulas-conteudos.xlsx](aulas-conteudos.xlsx)
-
-Mesmo que você não utilize essa extensão, será útil utilizar estas planilhas para manter atualizando seus registros.
-
-# Instale a extensão
-
-[Baixe o arquivo zip dessa extensão](https://github.com/edusantana/saber-pb/archive/master.zip), descompacte em alguma lugar e instale a extensão ativando o modo desenvolvedor.
+- [Para registro de aulas (conteúdos e frequência)](https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx)
+- [Para registro de avaliações](https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx)
 
 
 <div id="disqus_thread"></div>
