@@ -2,6 +2,9 @@
 
 Extensão para facilitar a vida dos professores ao cadastrar informações no site do saber do Governo do Estado da Paraíba.
 
+![apresentacao-inicial](https://user-images.githubusercontent.com/3603111/81852307-35657880-9531-11ea-9b14-1e9ff0f19d25.png)
+
+
 # Resumo executivo
 
 - A ferramenta é gratuita e segura (+199 usuários)
@@ -35,6 +38,8 @@ As seguintes planilhas são mantidas para facilitar a manipulação dos registro
 
 
 # Suporte
+
+Precisa de ajuda? Pode entrar em contato.
 
 WhatsApp/Telefone: **(83) 98108-1977**
 
