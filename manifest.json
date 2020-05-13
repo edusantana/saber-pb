@@ -4,7 +4,7 @@
 	"name": "Saber PB",
 	"short_name": "saber-pb",
 	"description": "Auxilia os professores do governo do estado da Paraíba agilizando a edicação da plataforma do saber.",
-	"homepage_url" : "https://github.com/edusantana/saber-pb",
+	"homepage_url" : "https://edusantana.github.io/saber-pb/",
 	"permissions": [
 		"storage"
 	],

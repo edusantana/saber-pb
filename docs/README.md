@@ -6,18 +6,41 @@ Extensão para facilitar a vida dos professores ao cadastrar informações no si
 
 # Resumo executivo
 
+- A ferramenta é gratuita e segura (+200 usuários)
+
 - Você pode instalar através [desse link, no Google Chrome Web Store](https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem?hl=pt-BR).
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/R_0gQxTHqbg?start=89" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+# Sobre a ferramenta
 
-# Planilhas
+# Aprendendo a usar
 
-Utilize as planilhas a seguir como modelo para manter seu registro pessoal de suas atividades:
+## Vídeos
 
-- [Para registro de aulas (conteúdos e frequência)](https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx)
+## Planilhas
+
+As seguintes planilhas estão mantidas para facilitar a manipulação dos registros no saber:
+
+- [Para registro de aulas (conteúdos e frequências)](https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx)
 - [Para registro de avaliações](https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx)
 
+
+# Suporte
+
+Caso necessite de suporte pode ligar para mim através do seguinte telefone: (83) 98108-1977.
+
+## Outros serviços
+
+- Consultoria tecnológica
+- Tornar o computador mais rápido
+- Desenvolvimento e manutenção de sistemas
+- Produção de livros (eternize quem você ama escrevendo um livro sobre a pessoa)
+
+
+# Comentários
+
+Se quiser, pode deixar seu comentário aqui.
 
 <div id="disqus_thread"></div>
 <script>
