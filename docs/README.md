@@ -2,9 +2,6 @@
 
 Extensão para facilitar a vida dos professores ao cadastrar informações no site do saber do Governo do Estado da Paraíba.
 
-![apresentacao-inicial](https://user-images.githubusercontent.com/3603111/81852307-35657880-9531-11ea-9b14-1e9ff0f19d25.png)
-
-
 # Resumo executivo
 
 - A ferramenta é gratuita e segura (+199 usuários)
@@ -25,6 +22,8 @@ Essa extensão é gratuita, meu presente para vocês. Caso desejem retribuir con
 
 # Aprendendo a usar
 
+![apresentacao-inicial](https://user-images.githubusercontent.com/3603111/81852307-35657880-9531-11ea-9b14-1e9ff0f19d25.png)
+
 ## Vídeos
 
 - [Playlist oficial apresentando a ferramenta](https://www.youtube.com/watch?v=R_0gQxTHqbg&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN)
@@ -35,7 +34,6 @@ As seguintes planilhas são mantidas para facilitar a manipulação dos registro
 
 - [Para registro de aulas (conteúdos e frequências)](https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx)
 - [Para registro de avaliações](https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx)
-
 
 # Suporte
 
