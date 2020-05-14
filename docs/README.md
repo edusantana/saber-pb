@@ -1,10 +1,10 @@
 # Extensão saber-pb
 
-Extensão para facilitar a vida dos professores ao cadastrar informações no site do saber do Governo do Estado da Paraíba.
+Extensão para facilitar a vida dos professores ao cadastrar informações no [site do saber do Governo do Estado da Paraíba](http://www.saber.pb.gov.br/).
 
 # Resumo executivo
 
-- A ferramenta é gratuita e segura (+199 usuários)
+- A ferramenta é gratuita e segura (+200 usuários)
 
 - Você pode instalar através [desse link, no Google Chrome Web Store](https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem?hl=pt-BR).
 
@@ -23,6 +23,32 @@ Essa extensão é gratuita, meu presente para vocês. Caso desejem retribuir con
 # Aprendendo a usar
 
 ![apresentacao-inicial](https://user-images.githubusercontent.com/3603111/81852307-35657880-9531-11ea-9b14-1e9ff0f19d25.png)
+
+## Funcionalidades
+
+- Aulas
+    - Exportar planejamento das aulas para planilha
+    - Importar planejamento das aulas de planilha
+    - Importar cadastro de frequência dos alunos
+    - Realçar cadastros incorretos (feriados e dias sem aulas)
+    - Configurar Nº de aulas seguidas padrão para novos registros
+    - Permite cadastrar "Ausente" ou "Não registrado" por padrão nas frequências
+    - Correção automático de frequência dos alunos transferidos
+- Avaliação
+    - Exportar e importar notas com planilha
+    - Aplicar uma nota inicial para todos os alunos da turma
+- Planilhas
+    - Planilhas com calendário de 2020
+    - Planilha com registros para Normativa nº 01 do Comitê de Gestão de Crise COVID-19
+- Outras melhorias
+    - Teclas de atalho
+    - Foco automático dos campos
+- Ajuda
+  - Vídeos
+  - Site de ajuda
+  - Sugerir melhoria
+  - Suporte
+
 
 ## Vídeos
 
