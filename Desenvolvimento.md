@@ -2,6 +2,8 @@
 
 [Baixe o arquivo zip dessa extensão](https://github.com/edusantana/saber-pb/archive/master.zip), descompacte em alguma lugar e instale a extensão ativando o modo desenvolvedor no Chrome.
 
+Ver https://youtu.be/bleAA-IufqQ nesse vídeo demonstro como executar um código na página para atingir um objetivo específico, a extensão é apenas um conjunto em sequência desses códigos.
+
 
 # Referências
 
