@@ -65,6 +65,14 @@ As seguintes planilhas são mantidas para facilitar a manipulação dos registro
 - [Para registro de aulas (conteúdos e frequências)](https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx)
 - [Para registro de avaliações](https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx)
 
+# Código para marcar frequência dos alunos não registrado
+
+Fiz [esse vídeo](https://www.youtube.com/watch?v=bleAA-IufqQ) demonstrando como marcar **não registrado sem precisar instalar nada**, apenas executando o seguinte código:
+
+```javascript
+for(var caixa of document.querySelectorAll('[id*=_status_2]')) {caixa.checked='checked'}
+```
+
 # Suporte
 
 Precisa de ajuda? Pode entrar em contato.
