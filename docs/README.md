@@ -8,8 +8,6 @@ Extensão para facilitar a vida dos professores ao cadastrar informações no [s
 
 - Você pode instalar através [desse link, no Google Chrome Web Store](https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem?hl=pt-BR).
 
-https://www.youtube.com/watch?v=HosHRkk44cs&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HosHRkk44cs?start=260" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Sobre a ferramenta
@@ -54,7 +52,7 @@ Essa extensão é gratuita, meu presente para vocês. Caso desejem retribuir con
 
 ## Vídeos
 
-- [Playlist oficial apresentando a ferramenta](https://www.youtube.com/watch?v=R_0gQxTHqbg&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN)
+- [Playlist oficial apresentando a ferramenta](https://www.youtube.com/watch?v=HosHRkk44cs&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN)
 
 ## Planilhas
 
