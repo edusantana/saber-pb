@@ -54,7 +54,7 @@ Essa extensão é gratuita, meu presente para vocês. Caso desejem retribuir con
 
 - [Playlist oficial apresentando a ferramenta](https://www.youtube.com/watch?v=h6VVqVSFnLA&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN)
 
-### Vídeos produzidos por outras pessoas
+### Produzidos por outras pessoas
 
 - [Prof.: Cláudio Teodista Matemática e Tutoriais](https://www.youtube.com/watch?v=RmilmFq061Q)
 
