@@ -8,7 +8,7 @@ Extensão para facilitar a vida dos professores ao cadastrar informações no [s
 
 - Você pode instalar através [desse link, no Google Chrome Web Store](https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem?hl=pt-BR).
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/HosHRkk44cs?start=260" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/h6VVqVSFnLA?start=260" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Sobre a ferramenta
 
@@ -32,7 +32,7 @@ Essa extensão é gratuita, meu presente para vocês. Caso desejem retribuir con
     - Importar cadastro de frequência dos alunos
     - Realçar cadastros incorretos (feriados e dias sem aulas)
     - Configurar Nº de aulas seguidas padrão para novos registros
-    - Permite cadastrar "Ausente" ou "Não registrado" por padrão nas frequências
+    - Permite cadastrar "Ausente" ou "Não registrado" por padrão nas frequências (_evita tendinite_)
     - Correção automático de frequência dos alunos transferidos
 - Avaliação
     - Exportar e importar notas com planilha
@@ -52,7 +52,7 @@ Essa extensão é gratuita, meu presente para vocês. Caso desejem retribuir con
 
 ## Vídeos
 
-- [Playlist oficial apresentando a ferramenta](https://www.youtube.com/watch?v=HosHRkk44cs&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN)
+- [Playlist oficial apresentando a ferramenta](https://www.youtube.com/watch?v=h6VVqVSFnLA&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN)
 
 ## Planilhas
 
