@@ -4,7 +4,7 @@ Extensão para facilitar a vida dos professores ao cadastrar informações no [s
 
 # Resumo executivo
 
-- A ferramenta é gratuita e segura (+260 usuários)
+- A ferramenta é gratuita e **segura** (+300 usuários)
 
 - Você pode instalar através [desse link, no Google Chrome Web Store](https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem?hl=pt-BR).
 
@@ -43,6 +43,7 @@ Essa extensão é gratuita, meu presente para vocês. Caso desejem retribuir con
 - Outras melhorias
     - Teclas de atalho
     - Foco automático dos campos
+    - Comentários e navegação automática
 - Ajuda
   - Vídeos
   - Site de ajuda

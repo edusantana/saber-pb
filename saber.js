@@ -1,3 +1,49 @@
+function redireciona_turma(){
+  // se novo registro começa com #numéro então redireciona
+  // para a turma especifica
+  // exemplo:
+  // #1238787 qualquer coisa
+
+  chrome.storage.sync.get({
+    //favoriteColor : 'red',
+    //likesColor : true,
+    registros: '',
+  }, function(itens) {
+    let linhas = itens.registros.split('\n')
+    let primeira_linha = linhas[0];
+    if (primeira_linha.startsWith('#')){
+      let inicio = primeira_linha.replace(/\t/g, " ").split(' ')[0];
+      let codigo = inicio.substring(1);
+      console.log(`Código lido:  '${codigo}'`);
+      if (codigo=='' || isNaN(codigo)){
+        // Se depois de # não vier número, não faz nada
+        // fica semelhante a uma mensagem
+        //alert(primeira_linha);
+      }else{
+        if (!window.location.pathname.includes(codigo)){
+          console.log(`Redireciona para http://www.saber.pb.gov.br/platform/teachings/${codigo}`);
+          window.location.href = `http://www.saber.pb.gov.br/platform/teachings/${codigo}`;
+        }else{
+          // apaga primeira linha (após redirecionado)
+          linhas.shift();
+
+          let novo_registros = linhas.join("\n");
+          //console.log(`novo_registros: ${novo_registros}.`)
+          chrome.storage.sync.set({
+            registros: novo_registros,
+          }, function() {
+            // Update status to let user know options were saved.
+            console.log(`Registro removido: ${primeira_linha}.`)
+          });
+        }
+      }
+
+
+    }
+  });
+}
+
+redireciona_turma();
 
 // Adicionar tecla de atalho ao link "Novo registro de aula" ALT+N
 // Procura por link ".*/new"
@@ -74,8 +120,9 @@ https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx
 function save_options() {
   console.log("Salvando registros");
   var registros= document.getElementById('registros').value.trim();
+
   chrome.storage.sync.set({
-    registros: registros,
+    'registros': registros,
   }, function() {
     // Update status to let user know options were saved.
     document.querySelector('#alerta').innerHTML='<div class="alert alert-success">Salvo</div>'
@@ -93,8 +140,42 @@ function save_aulas_seguidas(){
   });
 }
 
+/**
+* Salva array de registros
+*/
+function salva_registros(registros){
+  document.querySelector("#registros").value = registros.join("\n");
+  save_options();
+}
+
+function string_para_ordenar(r){
+  return `r.children[3].textContent.trim() r.children[2].textContent.trim() r.children[1].textContent.trim()`
+}
+
+function criarComentariosDeTurmas(){
+
+  var registros = Array.from(document.querySelectorAll("table tbody tr"));
+  //registros.sort((a, b) => string_para_ordenar(a).localeCompare(string_para_ordenar(b), 'pt', { sensitivity: 'base' }));
+  var planilha = []
+
+  // Registros de aula class_logs
+  for (r of registros) {
+    let turma = r.children[3].textContent.trim();
+    let disciplina = r.children[2].textContent.trim();
+    let escola = r.children[1].textContent.trim();
+    let link = r.children[9].querySelector('a').href
+    // http://www.saber.pb.gov.br/platform/teachings/1238787/class_logs
+    let turma_id = link.split('/')[5]
+    planilha.push(`# ${turma_id} ${turma} < ${disciplina} < ${escola}`)
+  }
+  // ordena as turmas ignorando case
+  planilha.unshift("# Todas as turmas")
+  salva_registros(planilha);
+}
+
 function pegar_registros(){
   console.log("Pegando registros");
+
   //#body > tbody > tr
   var registros = Array.from(document.querySelectorAll("table tbody tr"));
   var planilha = []
@@ -110,8 +191,7 @@ function pegar_registros(){
     planilha.push(linha)
   }
 
-  document.querySelector("#registros").value = planilha.join("\n");
-  save_options();
+  salva_registros(planilha);
 }
 
 function criaPainel(){
@@ -127,6 +207,7 @@ function criaPainel(){
 
   let pegar_registros = window.location.pathname.endsWith("class_logs")?        `<li><a id="pegar-registros" href="#" accesskey="c"><u>C</u>opiar registros</a></li><li class="divider"></li>`: ""
   let numeroDeAulas   = window.location.pathname.endsWith("class_frequencies")? `<li><a id="salva-n-aulas" href="#">Nº de aulas seguidas</a></li><li class="divider"></li>`: ""
+  let comentariosDeTurmas = isPaginaMinhasAulas()? `<li><a id="comentarios" href="#" accesskey="c"><u>C</u>riar comentários</a></li><li class="divider"></li>`: ""
 
   painel.innerHTML = `
     <div class="row">
@@ -140,6 +221,7 @@ function criaPainel(){
             <ul class="dropdown-menu">
               ${pegar_registros}
               ${numeroDeAulas}
+              ${comentariosDeTurmas}
               <li><a href="https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx">Planilha de aulas</a></li>
               <li><a href="https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx">Planilha de avaliações</a></li>
               <li class="divider"></li>
@@ -172,10 +254,15 @@ function restore_options() {
 	});
 }
 
+function isPaginaMinhasAulas(){
+  // http://www.saber.pb.gov.br/platform/teachings
+  return window.location.pathname.endsWith("teachings");
+}
 
 if (window.location.pathname.endsWith("class_logs")
 		|| window.location.pathname.endsWith("class_frequencies")
 		|| window.location.pathname.endsWith("class_ratings")
+    || isPaginaMinhasAulas()
 		) {
 	criaPainel();
 
@@ -186,6 +273,9 @@ if (window.location.pathname.endsWith("class_logs")
   }
   if (document.querySelector('#pegar-registros')){
     document.querySelector('#pegar-registros').addEventListener("click", pegar_registros);
+  }
+  if (document.querySelector('#comentarios')){
+    document.querySelector('#comentarios').addEventListener("click", criarComentariosDeTurmas);
   }
 
   restore_options();
@@ -573,18 +663,20 @@ function atualizaColagemAPartirDoPrimeiroRegistroDaSerie(){
 	    	let registros = items.registros.split("\n");
 	    	console.log("Quantidade de registros: " + registros.length);
 	    	let registro = registros.shift();
-	    	console.log("Dados para o novo registro: " + registro);
-	    	colagem.value = registro;
-	    	colagem.dispatchEvent(new Event('change'));
+        console.log("Dados para o novo registro: " + registro);
+        colagem.value = registro;
+        // Remove apenas registros que não começam com #
+        if (!registro.startsWith('#')){
+          colagem.dispatchEvent(new Event('change'));
+          var registrosAtualizado = registros.join("\n");
 
-	    	var registrosAtualizado = registros.join("\n");
-
-	    	chrome.storage.sync.set({
-	    		registros: registrosAtualizado
-	    	}, function() {
-	    		console.log("Registros atualizados");
-	    		console.log("Atualizando registros com: " + registrosAtualizado);
-	    	});
+          chrome.storage.sync.set({
+            registros: registrosAtualizado
+          }, function() {
+            console.log("Registros atualizados");
+            console.log("Atualizando registros com: " + registrosAtualizado);
+          });
+        }
 
 	    }
 	});
@@ -599,7 +691,7 @@ function atualizaNumeroDeAulasEmSequencia(caixa){
   chrome.storage.sync.get({
     aulas_seguidas: '1'
   }, function(items) {
-    console.log("Registros atuais: " + items)
+    //console.log("Registros atuais: " + items)
     caixa.value = items.aulas_seguidas;
   });
 
