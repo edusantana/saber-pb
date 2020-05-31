@@ -71,6 +71,8 @@ As seguintes planilhas são mantidas para facilitar a manipulação dos registro
 
 Agora é possível carregar um [calendário de feriados](https://github.com/edusantana/saber-pb/blob/master/feriados-escolares.txt) que foi concebido para ser atualizado por vocês, usuários da extensão.
 
+![Captura de tela de 2020-05-31 14-04-14](https://user-images.githubusercontent.com/3603111/83358129-c026df80-a347-11ea-97de-4dea28715a97.png)
+
 Para editar o calendário (comunitário) é necessário:
 
 1. [Solicitar permissão](https://github.com/edusantana/saber-pb/issues/new?title=Solicito%20permissão%20para%20editar%20calendário)
