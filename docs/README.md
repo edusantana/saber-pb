@@ -31,6 +31,7 @@ Essa extensão é gratuita, meu presente para vocês. Caso desejem retribuir con
     - Importar planejamento das aulas de planilha
     - Importar cadastro de frequência dos alunos
     - Realçar cadastros incorretos (feriados e dias sem aulas)
+    - Carregar um calendário de feriados
     - Configurar Nº de aulas seguidas padrão para novos registros
     - Permite cadastrar "Ausente" ou "Não registrado" por padrão nas frequências (_evita tendinite_)
     - Correção automático de frequência dos alunos transferidos
@@ -66,7 +67,7 @@ As seguintes planilhas são mantidas para facilitar a manipulação dos registro
 - [Para registro de aulas (conteúdos e frequências)](https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx)
 - [Para registro de avaliações](https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx)
 
-# Calendário de feriados
+## Calendário de feriados
 
 Agora é possível carregar um [calendário de feriados](https://github.com/edusantana/saber-pb/blob/master/feriados-escolares.txt) que foi concebido para ser atualizado por vocês, usuários da extensão.
 
@@ -74,11 +75,11 @@ Para editar o calendário (comunitário) é necessário:
 
 1. [Solicitar permissão](https://github.com/edusantana/saber-pb/issues/new?title=Solicito%20permissão%20para%20editar%20calendário)
 2. Aguardar que eu envie o convite para editar o repositório
-3. Abrir o convite para editação do repositório no e-mail e aceitar
+3. Abrir o convite (no e-mail) para editação do repositório e aceitar
 
 Realizado esses passos (uma única vez), você poderá [editar o arquivo de calendário](https://github.com/edusantana/saber-pb/blob/master/feriados-escolares.txt) clicando no *lapis*.
 
-> [Dúvidas sobre como contribuir com o calendário?](https://github.com/edusantana/saber-pb/issues/6)
+> [Dúvidas sobre o calendário?](https://github.com/edusantana/saber-pb/issues/6)
 
 # Código para marcar frequência dos alunos não registrado
 
