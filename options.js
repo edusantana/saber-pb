@@ -28,7 +28,7 @@ function restore_options() {
   chrome.storage.sync.get({
   //favoriteColor : 'red',
   //likesColor : true,
-  feriados: '01/01/2020\n21/04/2020\n01/05/2020\n07/09/2020\n02/11/2020\n15/11/2020\n25/12/2020',
+  feriados: '',
   registros: '',
   aulas_seguidas: '1'
   }, function(items) {
