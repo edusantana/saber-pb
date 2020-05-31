@@ -31,7 +31,7 @@ Essa extensão é gratuita, meu presente para vocês. Caso desejem retribuir con
     - Importar planejamento das aulas de planilha
     - Importar cadastro de frequência dos alunos
     - Realçar cadastros incorretos (feriados e dias sem aulas)
-    - Carregar um calendário de feriados
+    - [Carregar um calendário de feriados](#calendário-de-feriados)
     - Configurar Nº de aulas seguidas padrão para novos registros
     - Permite cadastrar "Ausente" ou "Não registrado" por padrão nas frequências (_evita tendinite_)
     - Correção automático de frequência dos alunos transferidos
