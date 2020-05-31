@@ -1,8 +1,7 @@
-# Feriados escolares
-01/01/2020
-21/04/2020
-01/05/2020
-07/09/2020
-02/11/2020
-15/11/2020
-25/12/2020
+01/01/2020: Confraternização Universal
+21/04/2020: Tiradentes
+01/05/2020: Dia do Trabalhado
+07/09/2020: Dia da Independência
+02/11/2020: Finados
+15/11/2020: Proclamação da república
+25/12/2020: Natal

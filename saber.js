@@ -384,7 +384,7 @@ if (window.location.pathname.includes("class_frequencies")){
 function temImpedimentoParaAData(dia, dias_sem_aulas){
 	var temImpedimento = false;
 	for(j=0; j<dias_sem_aulas.length; j++){
-		if (dia.includes(dias_sem_aulas[j])){
+		if (dia.includes(dias_sem_aulas[j].substr(0,10))){
 			temImpedimento = true;
 			break;
 		}
@@ -401,7 +401,7 @@ function realcaDiasSemAulasNaTabela(){
   chrome.storage.sync.get('feriados', function(data) {
 	if (data.feriados!=null){
 	  	var dias_sem_aulas = data.feriados.split("\n");
-	  	console.log("Configuração de dias sem aulas: '" + dias_sem_aulas+"'");
+	  	//console.log("Configuração de dias sem aulas: '" + dias_sem_aulas+"'");
 
 	  	if (dias_sem_aulas.length == 1){
 	  		if (dias_sem_aulas[0] == ""){
@@ -412,7 +412,7 @@ function realcaDiasSemAulasNaTabela(){
 	  	if (dias_sem_aulas.length >= 1){
 
 	  	  	if (document.getElementsByTagName("tbody").length > 0){
-	  	  		console.log("Configuração de dias sem aulas: '" + dias_sem_aulas+"'");
+	  	  		//console.log("Configuração de dias sem aulas: '" + dias_sem_aulas+"'");
 	  	  		let tbody = document.getElementsByTagName("tbody")[0];
 
 	  	  	    for(i=0; i<tbody.children.length; i++){

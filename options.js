@@ -40,17 +40,15 @@ function restore_options() {
 }
 
 function atualixa_caixa_feriados () {
-  console.log(this.responseText);
+  document.getElementById('feriados').value=this.responseText
 };
 
 function carrega_calendario(){
+  console.log('Carregando calendário')
   var requisicao = new XMLHttpRequest();
-  oReq.onload = atualixa_caixa_feriados;
-  oReq.open("get", "yourFile.txt", true);
-  oReq.send();
-
-
-
+  requisicao.onload = atualixa_caixa_feriados;
+  requisicao.open("get", "https://github.com/edusantana/saber-pb/raw/master/feriados-escolares.txt", true);
+  requisicao.send();
 }
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
@@ -62,5 +60,5 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
   });
 
 document.addEventListener('DOMContentLoaded', restore_options);
-document.addEventListener('carrega_calendario', carrega_calendario);
 document.getElementById('save').addEventListener('click', save_options);
+document.getElementById('carrega_calendario').addEventListener('click', carrega_calendario);
