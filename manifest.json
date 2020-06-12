@@ -1,6 +1,6 @@
 {
 	"manifest_version": 2,
-	"version": "2020.05.31",
+	"version": "2020.06.12",
 	"name": "Saber PB",
 	"short_name": "saber-pb",
 	"description": "Auxilia os professores do governo do estado da Paraíba agilizando a edicação da plataforma do saber.",
@@ -22,6 +22,7 @@
 				"http://saber.pb.gov.br/platform/*"
 			],
 			"js": [
+				"js/luxon.min.js",
 				"saber.js"
 			]
 		}

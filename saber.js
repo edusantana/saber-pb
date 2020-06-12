@@ -194,10 +194,68 @@ function pegar_registros(){
   salva_registros(planilha);
 }
 
+function gerar_datas(inicio, fim, dias){
+  if(inicio > fim){
+    return `Data inicial precisa ser menor que hoje: ${inicio.toLocaleString()} - ${fim.toLocaleString()}`
+  }
+  result = [];
+  let data = inicio;
+  while(data <= fim){
+    for(dia of dias){
+      if(data.weekday+1 == dia){
+        result.push(data.toLocaleString())
+      }
+    }
+    data = data.plus({days: 1})
+  }
+  return result.join("\n");
+}
+
+function gerar_datas_para_registros(){
+
+
+  if(document.querySelector("#filters_after_day").value == "") {
+    let ultima_data_string = document.querySelectorAll("table tbody tr td")[0].textContent.trim()
+    let dia_posterior = luxon.DateTime.fromFormat(ultima_data_string, "dd/MM/yyyy").plus({days:1});
+
+    document.querySelector("#filters_after_day").value = dia_posterior.toLocaleString();
+    document.querySelector("#filters_after_day").style.backgroundColor="cyan";
+  }
+
+  const AJUDA_GERA_DATAS = `3,5
+Você não forneceu os dias da semana, eles são necessários para geração das datas.
+Significado dos números: 2: segunda, 3: terça, 4: quarta, 5: quinta, 6: sexta.
+Forneça dos dias da semana acima para gerar as datas para geração, tente novamente!`
+
+  let primeira_linha = document.querySelector("#registros").value.split("\n")[0]
+  if(primeira_linha == ""){
+    document.querySelector("#registros").value = AJUDA_GERA_DATAS;
+    return;
+  }else{
+    for (dia of primeira_linha.split(",")){
+      if (isNaN(dia)){
+        document.querySelector("#registros").value = AJUDA_GERA_DATAS;
+        return;
+      }
+    }
+  }
+
+  let data_inicial = document.querySelector("#filters_after_day").value
+
+  let inicio = luxon.DateTime.fromFormat(document.querySelector("#filters_after_day").value, "dd/MM/yyyy");
+  let hoje = luxon.DateTime.local();
+  let dias = primeira_linha.split(",");
+
+  console.log(`inicio: ${inicio}, hoje: ${hoje}, dias: ${dias}`);
+
+  result = gerar_datas(inicio, hoje, dias);
+  document.querySelector("#registros").value = result;
+}
+
 function criaPainel(){
 
   // remove breadcrumbs
-  document.querySelector('body > div.breadcrumbs > div > ul').remove()
+  // document.querySelector('body > div.breadcrumbs > div > ul').remove()
 
   var painel = document.createElement('div');
   Object.assign(painel, {
@@ -205,7 +263,8 @@ function criaPainel(){
     id: 'extensao-saber-pb'
   });
 
-  let pegar_registros = window.location.pathname.endsWith("class_logs")?        `<li><a id="pegar-registros" href="#" accesskey="c"><u>C</u>opiar registros</a></li><li class="divider"></li>`: ""
+  let pegar_registros = window.location.pathname.endsWith("class_logs")?        `<li><a id="pegar-registros" href="#" accesskey="c"><u>C</u>opiar registros</a></li>`: ""
+  let gerar_datas_para_registros = window.location.pathname.endsWith("class_logs")?        `<li><a id="gerar_datas_para_registros" href="#" accesskey="g"><u>G</u>erar datas até hoje</a></li><li class="divider"></li>`: ""
   let numeroDeAulas   = window.location.pathname.endsWith("class_frequencies")? `<li><a id="salva-n-aulas" href="#">Nº de aulas seguidas</a></li><li class="divider"></li>`: ""
   let comentariosDeTurmas = isPaginaMinhasAulas()? `<li><a id="comentarios" href="#" accesskey="c"><u>C</u>riar comentários</a></li><li class="divider"></li>`: ""
 
@@ -220,6 +279,7 @@ function criaPainel(){
           <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
             <ul class="dropdown-menu">
               ${pegar_registros}
+              ${gerar_datas_para_registros}
               ${numeroDeAulas}
               ${comentariosDeTurmas}
               <li><a href="https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx">Planilha de aulas</a></li>
@@ -276,6 +336,9 @@ if (window.location.pathname.endsWith("class_logs")
   }
   if (document.querySelector('#comentarios')){
     document.querySelector('#comentarios').addEventListener("click", criarComentariosDeTurmas);
+  }
+  if (document.querySelector('#gerar_datas_para_registros')){
+    document.querySelector('#gerar_datas_para_registros').addEventListener("click", gerar_datas_para_registros);
   }
 
   restore_options();
