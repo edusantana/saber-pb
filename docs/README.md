@@ -45,7 +45,7 @@ Essa extensão é gratuita, meu presente para vocês. Caso desejem retribuir con
 - Outras melhorias
     - Teclas de atalho
     - Foco automático dos campos
-    - Comentários e navegação automática
+    - [Comentários e navegação automática](https://youtu.be/1j_3yF5E8uY)
 - Ajuda
   - Vídeos
   - Site de ajuda
