@@ -35,6 +35,7 @@ Essa extensão é gratuita, meu presente para vocês. Caso desejem retribuir con
     - Configurar Nº de aulas seguidas padrão para novos registros
     - Permite cadastrar "Ausente" ou "Não registrado" por padrão nas frequências (_evita tendinite_)
     - Correção automático de frequência dos alunos transferidos
+    - [Gerar datas para cadastros](https://youtu.be/oVnPfS3olUQ)
 - Avaliação
     - Exportar e importar notas com planilha
     - Aplicar uma nota inicial para todos os alunos da turma
