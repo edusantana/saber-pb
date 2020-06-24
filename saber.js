@@ -100,13 +100,13 @@ icone.setAttribute('class', 'icon-download-alt');
 baixar_planilha_link.appendChild(icone);
 
 var plugin_link = document.createElement("a");
+plugin_link.setAttribute('id', 'avaliar-plugin-link');
 plugin_link.setAttribute('class', 'btn btn-info');
 plugin_link.setAttribute('title', 'Avaliar/Comentar plugin');
 plugin_link.setAttribute('href', 'https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem');
 var icone = document.createElement("i");
 icone.setAttribute('class', 'icon-comments-alt');
 plugin_link.appendChild(icone);
-
 
 /*
 Links das planilhas:
@@ -405,8 +405,46 @@ function corrigeOsNaoRegistrados(){
     		erros[i].parentElement.appendChild(aviso);
     	}
     }
+}
+
+
+function marca_presente(){
+  for(var caixa of document.querySelectorAll('[id*=_status_0]')) {caixa.checked='checked'}
+}
+function marca_ausente(){
+  for(var caixa of document.querySelectorAll('[id*=_status_1]')) {caixa.checked='checked'}
+}
+function  marca_nao_registrado(){
+  for(var caixa of document.querySelectorAll('[id*=_status_2]')) {caixa.checked='checked'}
+}
+
+
+function adicionaSeletorDePresencao(){
+  console.log("inside adicionaSeletorDePresencao")
+  var presenca_div = document.createElement('div');
+  Object.assign(presenca_div, {
+    className: 'btn-group',
+    id: 'seletor-de-presencao-div'
+  });
+
+  presenca_div.innerHTML = `
+          <button id="presenca-seletor" class="btn btn-primary" accesskey="g">Não re<b><u>g</u></b>istado</button>
+          <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a id="marca-presente" href="#">Presente</a></li>
+              <li><a id="marca-ausente" href="#">Ausente</a></li>
+            </ul>`;
+
+  // Adicionar no breadcrumbs
+  document.querySelector('#avaliar-plugin-link').after(presenca_div)
+
+  document.querySelector('#marca-presente').addEventListener("click", marca_presente);
+  document.querySelector('#marca-ausente').addEventListener("click", marca_ausente);
+  document.querySelector('#presenca-seletor').addEventListener("click", marca_nao_registrado);
+
 
 }
+
 
 if (window.location.pathname.includes("class_frequencies")){
     if (window.location.pathname.includes("/new") || window.location.pathname.includes("/edit")){
@@ -420,6 +458,7 @@ if (window.location.pathname.includes("class_frequencies")){
         baixar_planilha_link.setAttribute('href', 'https://github.com/edusantana/saber-pb/raw/master/frequencias.xlsx');
         breadcrumbs.appendChild(baixar_planilha_link);
         breadcrumbs.appendChild(plugin_link);
+        adicionaSeletorDePresencao();
     } else {
         console.log('Auto-seleção da caixa Número de aulas seguidas');
         var numeroDeAulas = document.querySelector("#classes");

@@ -5,3 +5,9 @@ Extensão para o Google Chrome com melhorias para a plataforma do saber do gover
 Página oficial da ferramenta: [https://edusantana.github.io/saber-pb](https://edusantana.github.io/saber-pb)
 
 [![apresentacao-inicial](https://user-images.githubusercontent.com/3603111/81852307-35657880-9531-11ea-9b14-1e9ff0f19d25.png)](https://edusantana.github.io/saber-pb)
+
+## Desenvolvimento
+
+A equipe de desenvolvimento do saber utiliza:
+
+- [bootstrap 2.3.2](https://getbootstrap.com/2.3.2/components.html)
