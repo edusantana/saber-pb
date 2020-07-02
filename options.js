@@ -5,12 +5,14 @@ function save_options() {
   var registros= document.getElementById('registros').value.trim();
   var aulas_seguidas=document.getElementById('aulas_seguidas').value.trim();
   //var likesColor = document.getElementById('like').checked;
+  var apresentar_assinatura=document.getElementById('apresentar_assinatura').checked;
   chrome.storage.sync.set({
   //favoriteColor : color,
   //likesColor : likesColor,
   feriados: diasFeriados,
   registros: registros,
-  aulas_seguidas: aulas_seguidas
+  aulas_seguidas: aulas_seguidas,
+  apresentar_assinatura: apresentar_assinatura
   }, function() {
   // Update status to let user know options were saved.
   var status = document.getElementById('status');
@@ -30,11 +32,13 @@ function restore_options() {
   //likesColor : true,
   feriados: '',
   registros: '',
-  aulas_seguidas: '1'
+  aulas_seguidas: '1',
+  apresentar_assinatura: true
   }, function(items) {
   document.getElementById('feriados').value = items.feriados;
   document.getElementById('registros').value = items.registros;
   document.getElementById('aulas_seguidas').value = items.aulas_seguidas;
+  document.getElementById('apresentar_assinatura').checked = items.apresentar_assinatura;
 
   });
 }

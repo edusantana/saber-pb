@@ -18,7 +18,7 @@ Esta ferramenta surgiu porque minha esposa odiava realizar os registros no [site
 
 Ao usar o sistema várias coisas me irritavam nele, então criei essa extensão para contornar as dificuldades e agilizar os cadastros. Pedi para ela compartilhar essa extensão com seus colegas professores, que também desejem ganhar tempo.
 
-Essa extensão é gratuita, meu presente para vocês. Caso desejem retribuir considerem contratar [um dos serviços que ofereço](#outros-serviços).
+Essa extensão é gratuita, meu presente para vocês.
 
 # Aprendendo a usar
 
@@ -106,6 +106,10 @@ E-mail: eduardo.ufpb@gmail.com
 - Tornar o computador mais rápido (_manutenção em notebook_)
 - Desenvolvimento e manutenção de sistemas
 - Produção de livros (eternize um familiar que faleceu, escreva em família e publique um livro sobre quem ama)
+
+# Assinatura
+
+Considere realizar [assinatura da extensão](https://sparkle.hotmart.com/u/edusantana82/subscriptions/5970) para auxiliar o seu desenvolvimento.
 
 # Comentários
 

@@ -291,6 +291,9 @@ function criaPainel(){
               <li><a href="https://edusantana.github.io/saber-pb">Ajuda</a></li>
             </ul>
         </div>
+        <div style="margin-top: 2px;" id="assinatura_div">
+          <a class="btn btn-info" href="https://sparkle.hotmart.com/u/edusantana82/subscriptions/5970">Assinatura</a>
+        </div>
       </div>
     </div>
     <div class="row" id="alerta">
@@ -316,13 +319,13 @@ function restore_options() {
 
 function isPaginaMinhasAulas(){
   // http://www.saber.pb.gov.br/platform/teachings
-  return window.location.pathname.endsWith("teachings");
+  return window.location.pathname.endsWith("/teachings");
 }
 
 if (window.location.pathname.endsWith("class_logs")
 		|| window.location.pathname.endsWith("class_frequencies")
 		|| window.location.pathname.endsWith("class_ratings")
-    || isPaginaMinhasAulas()
+    //|| isPaginaMinhasAulas()
 		) {
 	criaPainel();
 
@@ -342,13 +345,71 @@ if (window.location.pathname.endsWith("class_logs")
   }
 
   restore_options();
+  apresenta_oculta_assinatura();
+
   chrome.storage.onChanged.addListener(function(changes, namespace) {
       for (key in changes) {
       	if (key == "registros"){
       		restore_options();
       	}
+        if (key == "apresentar_assinatura"){
+          apresenta_oculta_assinatura();
+        }
       }
     });
+}
+
+function comunidade_link(){
+  var registros = Array.from(document.querySelectorAll("table tbody tr"));
+
+  let professor_portugues = false;
+
+  for (r of registros) {
+    let disciplina = r.children[2].textContent.trim();
+    if( disciplina.includes("Portug")){
+      professor_portugues = true;
+    }
+  }
+
+  if (professor_portugues){
+    var div = document.createElement('div');
+    Object.assign(div, {
+      className: 'text-center',
+      id: 'comunidade-saber-pb'
+    });
+
+    div.innerHTML = `
+    <a href="https://sparkle.hotmart.com/t/saber-pb-portugues" title="Comunidade do saber-pb"><img src="https://user-images.githubusercontent.com/3603111/86398556-2de26600-bc7c-11ea-8edf-4fab6f2c0e35.png"></a>
+    `
+
+    document.querySelector('div.breadcrumbs > div').appendChild(div)
+  }
+
+
+
+}
+
+if (isPaginaMinhasAulas()){
+  comunidade_link();
+}
+
+/*
+* Exibe ou oculta o botação Assinatura
+*/
+function apresenta_oculta_assinatura(){
+  chrome.storage.sync.get({
+		apresentar_assinatura: true
+	}, function(items) {
+    //console.log("apresentar_assinatura")
+    //console.log(items)
+    if (document.getElementById('assinatura_div')){
+      if (items.apresentar_assinatura){
+        document.getElementById('assinatura_div').style.display = "block";
+      }else{
+        document.getElementById('assinatura_div').style.display = "none";
+      }
+    }
+	});
 }
 
 /* =========== PAINEL FIM  ==================*/
