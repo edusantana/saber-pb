@@ -325,7 +325,7 @@ function isPaginaMinhasAulas(){
 if (window.location.pathname.endsWith("class_logs")
 		|| window.location.pathname.endsWith("class_frequencies")
 		|| window.location.pathname.endsWith("class_ratings")
-    //|| isPaginaMinhasAulas()
+    || isPaginaMinhasAulas()
 		) {
 	criaPainel();
 
@@ -359,39 +359,6 @@ if (window.location.pathname.endsWith("class_logs")
     });
 }
 
-function comunidade_link(){
-  var registros = Array.from(document.querySelectorAll("table tbody tr"));
-
-  let professor_portugues = false;
-
-  for (r of registros) {
-    let disciplina = r.children[2].textContent.trim();
-    if( disciplina.includes("Portug")){
-      professor_portugues = true;
-    }
-  }
-
-  if (professor_portugues){
-    var div = document.createElement('div');
-    Object.assign(div, {
-      className: 'text-center',
-      id: 'comunidade-saber-pb'
-    });
-
-    div.innerHTML = `
-    <a href="https://sparkle.hotmart.com/t/saber-pb-portugues" title="Comunidade do saber-pb"><img src="https://user-images.githubusercontent.com/3603111/86398556-2de26600-bc7c-11ea-8edf-4fab6f2c0e35.png"></a>
-    `
-
-    document.querySelector('div.breadcrumbs > div').appendChild(div)
-  }
-
-
-
-}
-
-if (isPaginaMinhasAulas()){
-  comunidade_link();
-}
 
 /*
 * Exibe ou oculta o botação Assinatura
@@ -405,6 +372,9 @@ function apresenta_oculta_assinatura(){
     if (document.getElementById('assinatura_div')){
       if (items.apresentar_assinatura){
         document.getElementById('assinatura_div').style.display = "block";
+        var sair = document.querySelector("#loginbar > li:nth-child(6) > a").textContent
+        var nome = sair.substring(sair.lastIndexOf('(')+1, sair.indexOf(')'));
+        document.getElementById('registros').placeholder = `Oi ${nome}, considere realizar uma Assinatura para apoiar o desenvolvimento desta extensão.`
       }else{
         document.getElementById('assinatura_div').style.display = "none";
       }
@@ -479,6 +449,21 @@ function  marca_nao_registrado(){
   for(var caixa of document.querySelectorAll('[id*=_status_2]')) {caixa.checked='checked'}
 }
 
+function preencher_justificativa(){
+  console.log("preencher_justificativa");
+  chrome.storage.sync.get({
+    justificativa: ""
+  }, function(items) {
+    console.log(items);
+
+    if (items.justificativa == ""){
+      document.getElementById('class_frequency_justification').value = "Configure uma justificativa em opções da extensão.";
+    }else{
+      document.getElementById('class_frequency_justification').value = items.justificativa;
+    }
+
+  });
+}
 
 function adicionaSeletorDePresencao(){
   console.log("inside adicionaSeletorDePresencao")
@@ -494,6 +479,8 @@ function adicionaSeletorDePresencao(){
             <ul class="dropdown-menu">
               <li><a id="marca-presente" href="#">Presente</a></li>
               <li><a id="marca-ausente" href="#">Ausente</a></li>
+              <li class="divider"></li>
+              <li><a id="preencher-justificativa" href="#">Preencher justificativa</a></li>
             </ul>`;
 
   // Adicionar no breadcrumbs
@@ -502,6 +489,9 @@ function adicionaSeletorDePresencao(){
   document.querySelector('#marca-presente').addEventListener("click", marca_presente);
   document.querySelector('#marca-ausente').addEventListener("click", marca_ausente);
   document.querySelector('#presenca-seletor').addEventListener("click", marca_nao_registrado);
+
+  document.querySelector('#preencher-justificativa').addEventListener("click", preencher_justificativa);
+
 
 
 }
