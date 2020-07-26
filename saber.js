@@ -1,3 +1,20 @@
+function isPaginaMinhasAulas(){
+  // http://www.saber.pb.gov.br/platform/teachings
+  return window.location.pathname.endsWith("/platform/teachings");
+}
+
+function isPaginaAulas(){
+  // http://www.saber.pb.gov.br/platform/teachings/1078922/class_logs
+  return window.location.pathname.endsWith("/class_logs");
+}
+
+function isPaginaFrequencias(){
+  // http://www.saber.pb.gov.br/platform/teachings/1078922/class_frequencies
+  return window.location.pathname.endsWith("/class_frequencies");
+}
+
+
+
 function redireciona_turma(){
   // se novo registro começa com #numéro então redireciona
   // para a turma especifica
@@ -92,21 +109,6 @@ colagem.cols = "100";
 colagem.rows = "4";
 colagem.placeholder = "Cole aqui as colunas copiadas do Excel, depois pressione TAB e ALT+s para salvar"
 
-var baixar_planilha_link = document.createElement("a");
-baixar_planilha_link.setAttribute('class', 'btn btn-info');
-baixar_planilha_link.setAttribute('title', 'Baixar planilha para facilitar edição');
-var icone = document.createElement("i");
-icone.setAttribute('class', 'icon-download-alt');
-baixar_planilha_link.appendChild(icone);
-
-var plugin_link = document.createElement("a");
-plugin_link.setAttribute('id', 'avaliar-plugin-link');
-plugin_link.setAttribute('class', 'btn btn-info');
-plugin_link.setAttribute('title', 'Avaliar/Comentar plugin');
-plugin_link.setAttribute('href', 'https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem');
-var icone = document.createElement("i");
-icone.setAttribute('class', 'icon-comments-alt');
-plugin_link.appendChild(icone);
 
 /*
 Links das planilhas:
@@ -213,7 +215,6 @@ function gerar_datas(inicio, fim, dias){
 
 function gerar_datas_para_registros(){
 
-
   if(document.querySelector("#filters_after_day").value == "") {
     let ultima_data_string = document.querySelectorAll("table tbody tr td")[0].textContent.trim()
     let dia_posterior = luxon.DateTime.fromFormat(ultima_data_string, "dd/MM/yyyy").plus({days:1});
@@ -250,6 +251,8 @@ Forneça dos dias da semana acima para gerar as datas para geração, tente nova
 
   result = gerar_datas(inicio, hoje, dias);
   document.querySelector("#registros").value = result;
+  document.querySelector("#registros").select();
+  document.execCommand('copy');
 }
 
 function criaPainel(){
@@ -314,12 +317,12 @@ function restore_options() {
 		registros: '',
 	}, function(items) {
 		document.getElementById('registros').value = items.registros;
+    var numeroDeAulas = document.querySelector("#classes");
+    if (numeroDeAulas!=null){
+      console.log('Focando em aulas seguidas...');
+      atualizaNumeroDeAulasEmSequencia(numeroDeAulas)
+    }
 	});
-}
-
-function isPaginaMinhasAulas(){
-  // http://www.saber.pb.gov.br/platform/teachings
-  return window.location.pathname.endsWith("/teachings");
 }
 
 if (window.location.pathname.endsWith("class_logs")
@@ -393,27 +396,34 @@ function atualizaRegistroDeFrequencia(){
     var valores = valor_colado.split("\t");
 
     console.log('Valores:' + valores);
+    // 2	27/11/2017	p	Justificativa
+    // 0: aulas seguidas
+    // 1: data
+    // 2: presença padrão
+    // 3: justificava
 
     // document.getElementById('class_frequency_day').value = '21/12/2017'
-    if (valores.length > 0){
-        document.getElementById('class_frequency_day').value = valores[0];
+    if (valores.length >= 2){
+        document.getElementById('class_frequency_day').value = valores[1];
     }
-    if (valores.length > 1){
-        document.getElementById('class_frequency_justification').value = valores[1];
-    }
-    if (valores.length > 2){
-        // 0 : Presente
-        // 1 : Ausente
-        // 2 : Não registrado
-        var registro_padrao = parseInt(valores[2]);
+    if (valores.length >= 3){
+        // Presente
+        // Ausente
+        // Não registrado
+        let map = {'p': 0, 'P': 0, 'a':1, 'A':1, 'n': 2, 'N': 2}
+        var registro_padrao = map[valores[2].charAt(0)];
 
         // Coloca um valor padrão para todos os registros dos alunos
         registros = document.querySelectorAll('input[type="radio"]');
         for (var i = 0; i < registros.length; i += 3) {
           document.querySelectorAll('input[type="radio"]')[i + registro_padrao].checked = true
         }
-
     }
+
+    if (valores.length >= 4){
+        document.getElementById('class_frequency_justification').value = valores[3];
+    }
+
     return;
 }
 
@@ -484,7 +494,7 @@ function adicionaSeletorDePresencao(){
             </ul>`;
 
   // Adicionar no breadcrumbs
-  document.querySelector('#avaliar-plugin-link').after(presenca_div)
+  document.querySelector('#colagem').after(presenca_div)
 
   document.querySelector('#marca-presente').addEventListener("click", marca_presente);
   document.querySelector('#marca-ausente').addEventListener("click", marca_ausente);
@@ -506,9 +516,6 @@ if (window.location.pathname.includes("class_frequencies")){
         if(window.location.pathname.includes("/new")){
         	atualizaColagemAPartirDoPrimeiroRegistroDaSerie()
         }
-        baixar_planilha_link.setAttribute('href', 'https://github.com/edusantana/saber-pb/raw/master/frequencias.xlsx');
-        breadcrumbs.appendChild(baixar_planilha_link);
-        breadcrumbs.appendChild(plugin_link);
         adicionaSeletorDePresencao();
     } else {
         console.log('Auto-seleção da caixa Número de aulas seguidas');
@@ -640,9 +647,6 @@ if (window.location.pathname.includes("class_logs") &&
     	atualizaColagemAPartirDoPrimeiroRegistroDaSerie()
     }
     colagem.focus();
-    baixar_planilha_link.setAttribute('href', 'https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx');
-    breadcrumbs.appendChild(baixar_planilha_link);
-    breadcrumbs.appendChild(plugin_link);
 
     // TODO: atualização valor padrão de aulas seguidas
 
@@ -791,9 +795,6 @@ if (window.location.pathname.includes("class_ratings") &&
 
     breadcrumbs.appendChild(colagem); //appendChild
     criarCamposNotas();
-    baixar_planilha_link.setAttribute('href', 'https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx');
-    breadcrumbs.appendChild(baixar_planilha_link);
-    breadcrumbs.appendChild(plugin_link);
     colagem.focus();
 
     if(window.location.pathname.includes("/new")){
@@ -835,18 +836,42 @@ function atualizaColagemAPartirDoPrimeiroRegistroDaSerie(){
 	});
 }
 
+function numeroDoProximoRegistro(registros){
+  let [comecaComNumero, numero] = [false,0]
+  if (registros!=""){
+    // 1\t27/11/2017\tp\tTexto da Justificativa
+    tudo = registros.split("\t")
+    if (tudo.length >0 && !isNaN(tudo[0])){
+      comecaComNumero=true
+      numero=tudo[0]
+    }
+  }
+  return [comecaComNumero, numero]
+}
+
 /*
 * Atualiza o valor da caixa com o número de aulas padrão
 */
 function atualizaNumeroDeAulasEmSequencia(caixa){
   console.log("Iniciando atualizaNumeroDeAulasEmSequencia...");
-
   chrome.storage.sync.get({
+    registros: '',
     aulas_seguidas: '1'
   }, function(items) {
-    //console.log("Registros atuais: " + items)
-    caixa.value = items.aulas_seguidas;
+    botaoAdicionar = document.getElementsByName("button")[1]
+
+    const [comecaComNumero, numero] = numeroDoProximoRegistro(items.registros)
+    if (comecaComNumero){
+      caixa.value = numero;
+      botaoAdicionar.disabled=false
+    }else{
+      caixa.value = items.aulas_seguidas;
+      // desabilita botão se não começa no número, provavelmente um erro
+      if (items.registros == ''){
+        botaoAdicionar.disabled=false
+      }else{
+        botaoAdicionar.disabled=true
+      }
+    }
   });
-
-
 }
