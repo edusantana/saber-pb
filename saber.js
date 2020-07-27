@@ -293,9 +293,12 @@ function criaPainel(){
               <li><a href="https://edusantana.github.io/saber-pb#suporte">Suporte</a></li>
               <li><a href="https://edusantana.github.io/saber-pb">Ajuda</a></li>
             </ul>
-        </div>
-        <div style="margin-top: 2px;" id="assinatura_div">
-          <a class="btn btn-info" href="https://sparkle.hotmart.com/u/edusantana82/subscriptions/5970">Assinatura</a>
+            <div style="margin-top: 2px;" id="novidades_div">
+              <a class="btn btn-info" href="https://sparkle.hotmart.com/t/saber-pb">Novidades</a>
+            </div>
+            <div style="margin-top: 2px;" id="assinatura_div">
+              <a class="btn btn-info" href="https://sparkle.hotmart.com/u/edusantana82/subscriptions/5970">Assinatura</a>
+            </div>
         </div>
       </div>
     </div>

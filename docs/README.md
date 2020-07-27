@@ -8,7 +8,7 @@ Extensão para facilitar a vida dos professores ao cadastrar informações no [s
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HD-cXS8xtQQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-- A ferramenta é **gratuita e segura** (+850 professores utilizam), veja apresentação dela:
+- A ferramenta é **gratuita e segura** (+900 professores utilizam), veja apresentação dela:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/h6VVqVSFnLA?start=260" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -39,6 +39,7 @@ Essa extensão é gratuita, meu presente para vocês.
     - Correção automático de frequência dos alunos transferidos
     - [Gerar datas para cadastros](https://youtu.be/oVnPfS3olUQ)
     - [Preencher justificava padrão clicando](https://youtu.be/ws5iSQAsFqk)
+    - [Agilidade no Registro de Frequência](https://youtu.be/DXrzjLXYmR8)
 - Avaliação
     - Exportar e importar notas com planilha
     - Aplicar uma nota inicial para todos os alunos da turma
