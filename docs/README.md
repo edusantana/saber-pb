@@ -41,11 +41,8 @@ Essa extensão é gratuita, meu presente para vocês.
     - [Preencher justificava padrão clicando](https://youtu.be/ws5iSQAsFqk)
     - [Agilidade no Registro de Frequência](https://youtu.be/DXrzjLXYmR8)
 - Avaliação
-    - Exportar e importar notas com planilha
+    - [Exportar e importar notas com planilha](https://youtu.be/udoXOhkK174)
     - Aplicar uma nota inicial para todos os alunos da turma
-- Planilhas
-    - Planilhas com calendário de 2020
-    - Planilha com registros para Normativa nº 01 do Comitê de Gestão de Crise COVID-19
 - Outras melhorias
     - Teclas de atalho
     - Foco automático dos campos
@@ -59,7 +56,7 @@ Essa extensão é gratuita, meu presente para vocês.
 
 ## Vídeos
 
-- [Playlist oficial apresentando a ferramenta](https://www.youtube.com/watch?v=h6VVqVSFnLA&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN)
+- [Playlist oficial apresentando a ferramenta](https://www.youtube.com/playlist?list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN)
 
 ### Produzidos por outras pessoas
 
