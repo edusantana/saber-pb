@@ -270,6 +270,15 @@ function criaPainel(){
   let gerar_datas_para_registros = window.location.pathname.endsWith("class_logs")?        `<li><a id="gerar_datas_para_registros" href="#" accesskey="g"><u>G</u>erar datas até hoje</a></li><li class="divider"></li>`: ""
   let numeroDeAulas   = window.location.pathname.endsWith("class_frequencies")? `<li><a id="salva-n-aulas" href="#">Nº de aulas seguidas</a></li><li class="divider"></li>`: ""
   let comentariosDeTurmas = isPaginaMinhasAulas()? `<li><a id="comentarios" href="#" accesskey="c"><u>C</u>riar comentários</a></li><li class="divider"></li>`: ""
+  let cadastroDeFrequenciaVideo = isPaginaFrequencias()? `<div class="row" id="cadastroDeFrequenciaHelp">
+    <div class="span6 text-center">
+      <div class="alert">
+      <p>Vou deixar esse aviso durante este mês.</p>
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <a class="btn btn-warning text-center" href="https://www.youtube.com/watch?v=DXrzjLXYmR8&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN&index=4">O cadastro de frequência agora está mais intuitivo</a>
+      </div>
+    </div>
+  </div>`:'';
 
   painel.innerHTML = `
     <div class="row">
@@ -288,7 +297,7 @@ function criaPainel(){
               <li><a href="https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx">Planilha de aulas</a></li>
               <li><a href="https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx">Planilha de avaliações</a></li>
               <li class="divider"></li>
-              <li><a href="https://www.youtube.com/watch?v=R_0gQxTHqbg&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN">Vídeos</a></li>
+              <li><a href="https://www.youtube.com/playlist?list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN">Vídeos</a></li>
               <li><a href="https://github.com/edusantana/saber-pb/issues/new">Sugerir melhoria</a></li>
               <li><a href="https://edusantana.github.io/saber-pb#suporte">Suporte</a></li>
               <li><a href="https://edusantana.github.io/saber-pb">Ajuda</a></li>
@@ -302,6 +311,7 @@ function criaPainel(){
         </div>
       </div>
     </div>
+    ${cadastroDeFrequenciaVideo}
     <div class="row" id="alerta">
     </div>`;
 
