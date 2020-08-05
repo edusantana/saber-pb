@@ -24,6 +24,14 @@ Essa extensão é gratuita, e **sempre continuará sendo gratuita**, meu present
 
 ![apresentacao-inicial](https://user-images.githubusercontent.com/3603111/81852307-35657880-9531-11ea-9b14-1e9ff0f19d25.png)
 
+## Vídeos
+
+Eu mantenho essa Playlist com vídeos na ordem que considero que um novo usuário iria melhor se beneficiar:
+
+- [Playlist oficial apresentando a ferramenta](https://www.youtube.com/playlist?list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN)
+
+
+
 ## Funcionalidades
 
 - Aulas
@@ -51,10 +59,6 @@ Essa extensão é gratuita, e **sempre continuará sendo gratuita**, meu present
   - Sugerir melhoria
   - Suporte
 
-
-## Vídeos
-
-- [Playlist oficial apresentando a ferramenta](https://www.youtube.com/playlist?list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN)
 
 ### Produzidos por outras pessoas
 
