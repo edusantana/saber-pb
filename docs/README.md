@@ -8,7 +8,7 @@ Extensão para facilitar a vida dos professores ao cadastrar informações no [s
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/HD-cXS8xtQQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-- A ferramenta é **gratuita e segura** (+900 professores utilizam), veja apresentação dela:
+- A ferramenta é **gratuita e segura** (+1.000 professores utilizam), veja apresentação dela:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/h6VVqVSFnLA?start=260" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -16,11 +16,9 @@ Extensão para facilitar a vida dos professores ao cadastrar informações no [s
 
 ![](https://user-images.githubusercontent.com/3603111/81819442-b444bc00-9505-11ea-918d-19731d8c47c7.png)
 
-Esta ferramenta surgiu porque minha esposa odiava realizar os registros no [site do saber](http://www.saber.pb.gov.br/), atrasava o trabalho, e então passei a ajudá-la.
+Esta ferramenta surgiu porque minha esposa odiava realizar os registros no site do saber, atrasava o trabalho, e então passei a ajudá-la. Confira [a história do desenvolvimento da ferramenta](https://www.linkedin.com/pulse/1000-usu%C3%A1rios-extens%C3%A3o-saber-pb-eduardo-santana/).
 
-Ao usar o sistema várias coisas me irritavam nele, então criei essa extensão para contornar as dificuldades e agilizar os cadastros. Pedi para ela compartilhar essa extensão com seus colegas professores, que também desejem ganhar tempo.
-
-Essa extensão é gratuita, meu presente para vocês.
+Essa extensão é gratuita, e **sempre continuará sendo gratuita**, meu presente para vocês!
 
 # Aprendendo a usar
 
