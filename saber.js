@@ -13,7 +13,10 @@ function isPaginaFrequencias(){
   return window.location.pathname.endsWith("/class_frequencies");
 }
 
-
+function isPaginaNovaAula(){
+  // http://www.saber.pb.gov.br/platform/teachings/1078922/class_logs/new
+  return window.location.pathname.endsWith("/class_logs/new");
+}
 
 function redireciona_turma(){
   // se novo registro começa com #numéro então redireciona
@@ -279,6 +282,14 @@ function criaPainel(){
       </div>
     </div>
   </div>`:'';
+  let portaria418 = isPaginaAulas()? `<div class="row">
+        <div class="span6">
+          <div class="alert">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <a class="btn btn-warning text-center" href="https://www.youtube.com/watch?v=whU2U5GEsXM"><b>Consonância com Portaria nº 418/2020</b></a>
+          </div>
+        </div>
+      </div>`:'';
 
   painel.innerHTML = `
     <div class="row">
@@ -312,6 +323,7 @@ function criaPainel(){
       </div>
     </div>
     ${cadastroDeFrequenciaVideo}
+    ${portaria418}
     <div class="row" id="alerta">
     </div>`;
 
@@ -519,6 +531,13 @@ function adicionaSeletorDePresencao(){
 
 }
 
+function mudaPresencaoPadraoCasoPortaria(){
+  chrome.storage.sync.get('portaria418', function(data) {
+	   if (data.portaria418){
+       marca_nao_registrado();
+     }
+   });
+}
 
 if (window.location.pathname.includes("class_frequencies")){
     if (window.location.pathname.includes("/new") || window.location.pathname.includes("/edit")){
@@ -527,7 +546,8 @@ if (window.location.pathname.includes("class_frequencies")){
         breadcrumbs.appendChild(colagem); //appendChild
         colagem.focus();
         if(window.location.pathname.includes("/new")){
-        	atualizaColagemAPartirDoPrimeiroRegistroDaSerie()
+        	atualizaColagemAPartirDoPrimeiroRegistroDaSerie();
+          mudaPresencaoPadraoCasoPortaria();
         }
         adicionaSeletorDePresencao();
     } else {
@@ -645,10 +665,34 @@ function atualizaRegistroDeAula(){
     if (valores.length > 2){
         document.getElementById('class_log_content').value = valores[2];
     }
+
     if (valores.length > 3){
-        document.getElementById('class_log_methodology').value = valores[3];
+        atualizaMetodologia(valores[3])
+    }else{
+      atualizaMetodologia('')
     }
     return;
+}
+
+function atualizaMetodologia(metodologia) {
+
+  chrome.storage.sync.get('portaria418', function(itens) {
+    if (itens.portaria418){
+      if (metodologia == ''){
+        document.getElementById('class_log_methodology').value = "Atividade elaborada em consonância com a publicação da Portaria nº 418/2020 SEECT.";
+      }else{
+        if(metodologia.includes("418")){
+          // ignora se texto contém 418
+          document.getElementById('class_log_methodology').value = metodologia;
+        }else{
+          document.getElementById('class_log_methodology').value = metodologia + "\nAtividade elaborada em consonância com a publicação da Portaria nº 418/2020 SEECT.";
+        }
+      }
+    }else{
+      document.getElementById('class_log_methodology').value = metodologia;
+    }
+  });
+
 }
 
 if (window.location.pathname.includes("class_logs") &&
@@ -820,7 +864,8 @@ if (window.location.pathname.includes("class_ratings") &&
 
 function atualizaColagemAPartirDoPrimeiroRegistroDaSerie(){
 	chrome.storage.sync.get({
-		registros: ''
+		registros: '',
+    portaria418: false
 	}, function(items) {
 	    //var valor_colado = document.getElementById('colagem').value;
 	    //var valores = valor_colado.split("\t");
@@ -845,7 +890,9 @@ function atualizaColagemAPartirDoPrimeiroRegistroDaSerie(){
           });
         }
 
-	    }
+	    }else{
+        atualizaMetodologia('');
+      }
 	});
 }
 

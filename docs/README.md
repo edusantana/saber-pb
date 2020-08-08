@@ -52,7 +52,7 @@ Eu mantenho essa Playlist com vídeos na ordem que considero que um novo usuári
 - Outras melhorias
     - Teclas de atalho
     - Foco automático dos campos
-    - [Comentários e navegação automática](https://youtu.be/1j_3yF5E8uY)
+    - [Portaria 418/2020](https://www.youtube.com/watch?v=whU2U5GEsXM)
 - Ajuda
   - Vídeos
   - Site de ajuda

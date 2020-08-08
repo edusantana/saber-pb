@@ -6,6 +6,7 @@ function save_options() {
   var aulas_seguidas=document.getElementById('aulas_seguidas').value.trim();
   var justificativa = document.getElementById('justificativa').value.trim();
   var apresentar_assinatura=document.getElementById('apresentar_assinatura').checked;
+  var portaria418=document.getElementById('portaria418').checked;
   chrome.storage.sync.set({
   //favoriteColor : color,
   //likesColor : likesColor,
@@ -13,6 +14,7 @@ function save_options() {
   registros: registros,
   aulas_seguidas: aulas_seguidas,
   apresentar_assinatura: apresentar_assinatura,
+  portaria418: portaria418,
   justificativa: justificativa
   }, function() {
   // Update status to let user know options were saved.
@@ -35,14 +37,15 @@ function restore_options() {
   registros: '',
   aulas_seguidas: '1',
   apresentar_assinatura: true,
+  portaria418: false,
   justificativa: ""
   }, function(items) {
   document.getElementById('feriados').value = items.feriados;
   document.getElementById('registros').value = items.registros;
   document.getElementById('aulas_seguidas').value = items.aulas_seguidas;
   document.getElementById('apresentar_assinatura').checked = items.apresentar_assinatura;
+  document.getElementById('portaria418').checked = items.portaria418;
   document.getElementById('justificativa').value = items.justificativa;
-
   });
 }
 
