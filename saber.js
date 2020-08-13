@@ -13,6 +13,14 @@ function isPaginaFrequencias(){
   return window.location.pathname.endsWith("/class_frequencies");
 }
 
+function isPaginaAvaliacao(){
+  // http://www.saber.pb.gov.br/platform/teachings/1078922/class_frequencies
+  return window.location.pathname.endsWith("/class_ratings");
+}
+
+
+
+
 function isPaginaNovaAula(){
   // http://www.saber.pb.gov.br/platform/teachings/1078922/class_logs/new
   return window.location.pathname.endsWith("/class_logs/new");
@@ -124,7 +132,7 @@ https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx
 // Saves options to chrome.storage
 function save_options() {
   console.log("Salvando registros");
-  var registros= document.getElementById('registros').value.trim();
+  var registros= document.getElementById('registros').value.trim().replace(/\|/gi,'\t');
 
   chrome.storage.sync.set({
     'registros': registros,
@@ -194,6 +202,17 @@ function pegar_registros(){
     var linha = [data,n_aulas,conteudo,metodologia].join("\t");
     console.log(linha);
     planilha.push(linha)
+  }
+
+  // caso especificado em #registros um número, interpretar como quantidade
+  // de registros que devem ser copiados.
+  var quantidade = document.querySelector("#registros").value
+  if (quantidade!='' && !isNaN(quantidade)){
+    if (quantidade > 0){
+      while(planilha.length>quantidade){
+        planilha.shift();
+      }
+    }
   }
 
   salva_registros(planilha);
@@ -273,6 +292,7 @@ function criaPainel(){
   let gerar_datas_para_registros = window.location.pathname.endsWith("class_logs")?        `<li><a id="gerar_datas_para_registros" href="#" accesskey="g"><u>G</u>erar datas até hoje</a></li><li class="divider"></li>`: ""
   let numeroDeAulas   = window.location.pathname.endsWith("class_frequencies")? `<li><a id="salva-n-aulas" href="#">Nº de aulas seguidas</a></li><li class="divider"></li>`: ""
   let comentariosDeTurmas = isPaginaMinhasAulas()? `<li><a id="comentarios" href="#" accesskey="c"><u>C</u>riar comentários</a></li><li class="divider"></li>`: ""
+  let salvaListaDeTurmasDaTabela  = isPaginaMinhasAulas()? `<li><a id="salvarTurmas" href="#" accesskey="t">Salvar ordem de <u>t</u>urmas</a></li><li class="divider"></li>`: ""
   let cadastroDeFrequenciaVideo = isPaginaFrequencias()? `<div class="row" id="cadastroDeFrequenciaHelp">
     <div class="span6 text-center">
       <div class="alert">
@@ -304,7 +324,7 @@ function criaPainel(){
               ${pegar_registros}
               ${gerar_datas_para_registros}
               ${numeroDeAulas}
-              ${comentariosDeTurmas}
+              ${salvaListaDeTurmasDaTabela}
               <li><a href="https://github.com/edusantana/saber-pb/raw/master/aulas-conteudos.xlsx">Planilha de aulas</a></li>
               <li><a href="https://github.com/edusantana/saber-pb/raw/master/avaliacoes.xlsx">Planilha de avaliações</a></li>
               <li class="divider"></li>
@@ -313,8 +333,8 @@ function criaPainel(){
               <li><a href="https://edusantana.github.io/saber-pb#suporte">Suporte</a></li>
               <li><a href="https://edusantana.github.io/saber-pb">Ajuda</a></li>
             </ul>
-            <div style="margin-top: 2px;" id="novidades_div">
-              <a class="btn btn-info" href="https://sparkle.hotmart.com/t/saber-pb">Novidades</a>
+            <div style="margin-top: 2px;">
+              <a class="btn btn-info" href="#" id="limpar"><u>L</u>impar</a>
             </div>
             <div style="margin-top: 2px;" id="assinatura_div">
               <a class="btn btn-info" href="https://sparkle.hotmart.com/u/edusantana82/subscriptions/5970">Assinatura</a>
@@ -328,7 +348,8 @@ function criaPainel(){
     </div>`;
 
   // Adicionar no breadcrumbs
-  document.querySelector('div.breadcrumbs > div').appendChild(painel)
+  //document.querySelector('div.breadcrumbs > div').appendChild(painel)
+  document.querySelector('#top').appendChild(painel)
 
 }
 
@@ -368,6 +389,15 @@ if (window.location.pathname.endsWith("class_logs")
   if (document.querySelector('#comentarios')){
     document.querySelector('#comentarios').addEventListener("click", criarComentariosDeTurmas);
   }
+  if (document.querySelector('#salvarTurmas')){
+    document.querySelector('#salvarTurmas').addEventListener("click", salvaListaDeTurmasDaTabela);
+  }
+  if (document.querySelector('#limpar')){
+    document.querySelector('#limpar').addEventListener("click", limpar);
+  }
+
+
+
   if (document.querySelector('#gerar_datas_para_registros')){
     document.querySelector('#gerar_datas_para_registros').addEventListener("click", gerar_datas_para_registros);
   }
@@ -418,7 +448,7 @@ function atualizaRegistroDeFrequencia(){
     // dia: class_frequency[day]
 
     var valor_colado = document.getElementById('colagem').value;
-    var valores = valor_colado.split("\t");
+    var valores = valor_colado.replace(/\|/gi,'\t').split("\t");
 
     console.log('Valores:' + valores);
     // 2	27/11/2017	p	Justificativa
@@ -652,7 +682,10 @@ function atualizaRegistroDeAula(){
     // dia: class_frequency[day]
 
     var valor_colado = document.getElementById('colagem').value;
-    var valores = valor_colado.split("\t");
+    var valores = valor_colado.replace(/\|/gi,'\t').split("\t");
+
+
+
 
     console.log('Valores:' + valores);
 
@@ -705,9 +738,20 @@ if (window.location.pathname.includes("class_logs") &&
     }
     colagem.focus();
 
-    // TODO: atualização valor padrão de aulas seguidas
-
 }
+
+if (isPaginaAulas() || isPaginaAvaliacao()){
+  // Foca botão "Novo registro de aula"
+  var links = document.getElementsByTagName('a');
+  for(i=0; i<links.length; i++){
+    console.log(links[i]);
+    if (links[i].href.endsWith("class_logs/new") || links[i].href.endsWith("class_ratings/new")){
+      links[i].focus();
+      break;
+    }
+  }
+}
+
 /* =======================================================*/
 
 /* ============== NOVA AVALIAÇÃO ===========================*/
@@ -717,7 +761,7 @@ function atualizaRegistroDeaAvaliacao(){
     // dia: class_frequency[day]
 
     var valor_colado = document.getElementById('colagem').value;
-    var valores = valor_colado.split("\t");
+    var valores = valor_colado.replace(/\|/gi,'\t').split("\t");
 
     console.log('Valores:' + valores);
 
@@ -823,7 +867,7 @@ function criarCamposNotas(){
 function atualizaNotas(){
 	console.log('O campo Notas mudou!');
 	var valor_colado = document.getElementById('notasTextArea').value;
-    var valores = valor_colado.split("\n");
+    var valores = valor_colado.replace(/\|/gi,'\t').split("\n");
     vi = 0;
 
     var inputs = document.getElementsByClassName('students-ratings')[0].getElementsByTagName('input')
@@ -934,4 +978,53 @@ function atualizaNumeroDeAulasEmSequencia(caixa){
       }
     }
   });
+}
+
+
+///////////////////////////////////////////////////////////////////////////
+// Minhas Aulas
+
+function salvaListaDeTurmasDaTabela(){
+  var registros = Array.from(document.querySelectorAll("table tbody tr"));
+  //registros.sort((a, b) => string_para_ordenar(a).localeCompare(string_para_ordenar(b), 'pt', { sensitivity: 'base' }));
+  var turmasArray = []
+
+  // Registros de aula class_logs
+  for (r of registros) {
+    let turma = r.children[3].textContent.trim();
+    let disciplina = r.children[2].textContent.trim();
+    let escola = r.children[1].textContent.trim();
+    let turno = r.children[5].textContent.trim();
+    let link = r.children[9].querySelector('a').href
+    // http://www.saber.pb.gov.br/platform/teachings/1238787/class_logs
+    let id = link.split('/')[5]
+    turmasArray.push([`${turma}(${turno}) < ${disciplina}`, id])
+  }
+
+  chrome.storage.local.set({
+    turmas: turmasArray,
+  }, function(){
+    console.log(`Salvando turmas: ${turmasArray}.`)
+  });
+
+}
+
+function salvaListaDeTurmasInicialmente(){
+  chrome.storage.local.get({
+    turmas: []
+  }, function(itens){
+    console.log(`turmas inicialmente: ${itens.turmas}.`)
+    if (itens.turmas.length == 0){
+      salvaListaDeTurmasDaTabela();
+    }
+  });
+}
+
+if(isPaginaMinhasAulas()){
+  salvaListaDeTurmasInicialmente();
+}
+
+function limpar(){
+  document.getElementById('registros').value='';
+  chrome.storage.sync.set({registros: ''})
 }
