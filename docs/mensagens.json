@@ -1,6 +1,7 @@
 {
 "desempenho.edit":
   [
-    ["Aprender recursos desta página", "icon-gift"]
+    ["Melhorias desta página", "https://edusantana.github.io/saber-pb/", "icon-gift"],
+    ["Novidade 24/8: Avaliação de desempenho ensino fundamental", "https://edusantana.github.io/saber-pb/", "icon-bell"]
   ]
 }
