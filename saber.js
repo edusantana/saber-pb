@@ -3,6 +3,10 @@ function isPaginaMinhasAulas(){
   return window.location.pathname.endsWith("/platform/teachings");
 }
 
+function isPaginaTurmasDeAtividadeComplementar(){
+  return window.location.pathname.endsWith("/platform/complementary_activity_teachings");
+}
+
 function isPaginaAulas(){
   // http://www.saber.pb.gov.br/platform/teachings/1078922/class_logs
   return window.location.pathname.endsWith("/class_logs");
@@ -18,13 +22,22 @@ function isPaginaAvaliacao(){
   return window.location.pathname.endsWith("/class_ratings");
 }
 
-
-
-
 function isPaginaNovaAula(){
   // http://www.saber.pb.gov.br/platform/teachings/1078922/class_logs/new
   return window.location.pathname.endsWith("/class_logs/new");
 }
+
+
+function isPaginaDesempenhoEscolaEdit(){
+  // http://www.saber.pb.gov.br/platform/school_classes/196362/enrollments/4663358/enrollment_early_years_rating_reports/1025520/edit
+  return new RegExp("enrollment_early_years_rating_reports/[0-9]+/edit$").test(window.location.pathname)
+}
+
+function condicaoExibirPainelSuperior(){
+  return isPaginaTurmasDeAtividadeComplementar() ||
+  isPaginaMinhasAulas();
+}
+
 
 function redireciona_turma(){
   // se novo registro começa com #numéro então redireciona
@@ -293,23 +306,8 @@ function criaPainel(){
   let numeroDeAulas   = window.location.pathname.endsWith("class_frequencies")? `<li><a id="salva-n-aulas" href="#">Nº de aulas seguidas</a></li><li class="divider"></li>`: ""
   let comentariosDeTurmas = isPaginaMinhasAulas()? `<li><a id="comentarios" href="#" accesskey="c"><u>C</u>riar comentários</a></li><li class="divider"></li>`: ""
   let salvaListaDeTurmasDaTabela  = isPaginaMinhasAulas()? `<li><a id="salvarTurmas" href="#" accesskey="t">Salvar ordem de <u>t</u>urmas</a></li><li class="divider"></li>`: ""
-  let cadastroDeFrequenciaVideo = isPaginaFrequencias()? `<div class="row" id="cadastroDeFrequenciaHelp">
-    <div class="span6 text-center">
-      <div class="alert">
-      <p>Vou deixar esse aviso durante este mês.</p>
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <a class="btn btn-warning text-center" href="https://www.youtube.com/watch?v=DXrzjLXYmR8&list=PL9kH1vkGoNugNdtEla-YHZWE0SRxGKIcN&index=4">O cadastro de frequência agora está mais intuitivo</a>
-      </div>
-    </div>
-  </div>`:'';
-  let portaria418 = isPaginaAulas()? `<div class="row">
-        <div class="span6">
-          <div class="alert">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <a class="btn btn-warning text-center" href="https://www.youtube.com/watch?v=whU2U5GEsXM"><b>Consonância com Portaria nº 418/2020</b></a>
-          </div>
-        </div>
-      </div>`:'';
+
+  let meses = `<li><a id="preencheDesempenhos" href="#"  accesskey="m">Preencher co<u>m</u>petências</a></li>`;
 
   painel.innerHTML = `
     <div class="row">
@@ -321,6 +319,7 @@ function criaPainel(){
           <button id="bSalvar" class="btn btn-primary" accesskey="s"><u>S</u>alvar</button>
           <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
             <ul class="dropdown-menu">
+              ${meses}
               ${pegar_registros}
               ${gerar_datas_para_registros}
               ${numeroDeAulas}
@@ -342,8 +341,8 @@ function criaPainel(){
         </div>
       </div>
     </div>
-    ${cadastroDeFrequenciaVideo}
-    ${portaria418}
+    <div class="alert"  id="mensagens">
+    </div>
     <div class="row" id="alerta">
     </div>`;
 
@@ -374,7 +373,7 @@ function restore_options() {
 if (window.location.pathname.endsWith("class_logs")
 		|| window.location.pathname.endsWith("class_frequencies")
 		|| window.location.pathname.endsWith("class_ratings")
-    || isPaginaMinhasAulas()
+    || isPaginaMinhasAulas() || isPaginaDesempenhoEscolaEdit()
 		) {
 	criaPainel();
 
@@ -396,7 +395,9 @@ if (window.location.pathname.endsWith("class_logs")
     document.querySelector('#limpar').addEventListener("click", limpar);
   }
 
-
+  if (document.querySelector('#limpar')){
+    document.querySelector('#preencheDesempenhos').addEventListener("click", preencheDesempenhos);
+  }
 
   if (document.querySelector('#gerar_datas_para_registros')){
     document.querySelector('#gerar_datas_para_registros').addEventListener("click", gerar_datas_para_registros);
@@ -404,6 +405,7 @@ if (window.location.pathname.endsWith("class_logs")
 
   restore_options();
   apresenta_oculta_assinatura();
+  baixa_mensagens();
 
   chrome.storage.onChanged.addListener(function(changes, namespace) {
       for (key in changes) {
@@ -443,6 +445,63 @@ function apresenta_oculta_assinatura(){
 /* =========== PAINEL FIM  ==================*/
 
 /* =========== REGISTRO DE FREQUÊNCIA  ==================*/
+
+
+function isPaginaDeAtualizacaoDeFrequenciaTurmaAtividadeComplementar(){
+  // pathname: /platform/complementary_activity_teachings/24839/complementary_activity_class_frequencies/new
+  return new RegExp("complementary_activity_class_frequencies/new$").test(window.location.pathname)
+}
+
+function atualizaCamposDoRegistroDeFrequenciaAula(valores){
+
+  // 2	27/11/2017	p	Justificativa
+  // 0: aulas seguidas
+  // 1: data
+  // 2: presença padrão
+  // 3: justificava
+
+
+  let campos = [null, "class_frequency_day", null, "class_frequency_justification"]
+
+  if (isPaginaDeAtualizacaoDeFrequenciaTurmaAtividadeComplementar()){
+
+    campos = [null, "complementary_activity_class_frequency_day", null, null] // não tem justificativa
+
+  }
+  
+  const PRESENCA = 2;
+
+  for (var j = 1; j < valores.length; j++) {
+
+    if (j == PRESENCA){
+        // Presente
+        // Ausente
+        // Não registrado
+        let map = {'p': 0, 'P': 0, 'a':1, 'A':1, 'n': 2, 'N': 2}
+        var registro_padrao = map[valores[PRESENCA].charAt(0)];
+
+        // Coloca um valor padrão para todos os registros dos alunos
+        registros = document.querySelectorAll('input[type="radio"]');
+        for (var i = 0; i < registros.length; i += 3) {
+          document.querySelectorAll('input[type="radio"]')[i + registro_padrao].checked = true
+        }
+    }else{
+      if(j < campos.length){
+        document.getElementById(campos[j]).value = valores[j];
+      }else{
+        console.log(`Ignorando: ${valores[j]}`)
+      }
+      
+    }
+    
+  }
+  
+
+
+
+  
+}
+
 function atualizaRegistroDeFrequencia(){
     console.log('Valor mudou!')
     // dia: class_frequency[day]
@@ -457,27 +516,7 @@ function atualizaRegistroDeFrequencia(){
     // 2: presença padrão
     // 3: justificava
 
-    // document.getElementById('class_frequency_day').value = '21/12/2017'
-    if (valores.length >= 2){
-        document.getElementById('class_frequency_day').value = valores[1];
-    }
-    if (valores.length >= 3){
-        // Presente
-        // Ausente
-        // Não registrado
-        let map = {'p': 0, 'P': 0, 'a':1, 'A':1, 'n': 2, 'N': 2}
-        var registro_padrao = map[valores[2].charAt(0)];
-
-        // Coloca um valor padrão para todos os registros dos alunos
-        registros = document.querySelectorAll('input[type="radio"]');
-        for (var i = 0; i < registros.length; i += 3) {
-          document.querySelectorAll('input[type="radio"]')[i + registro_padrao].checked = true
-        }
-    }
-
-    if (valores.length >= 4){
-        document.getElementById('class_frequency_justification').value = valores[3];
-    }
+    atualizaCamposDoRegistroDeFrequenciaAula(valores)
 
     return;
 }
@@ -676,6 +715,35 @@ function tipoDaPagina() {
   return "class_logs";
 }
 
+function isPaginaDeAtualizacaoDeAtividadeComplementar(){
+  // http://www.saber.pb.gov.br/platform/complementary_activity_teachings/24839/complementary_activity_class_logs/new
+  return window.location.pathname.endsWith("complementary_activity_class_logs/new")
+}
+
+function atualizaCamposDoRegistroDeAula(valores){
+
+  let campos = ["class_log_day", "class_log_classes", "class_log_content", "class_log_methodology"]
+
+  if (isPaginaDeAtualizacaoDeAtividadeComplementar()){
+
+    campos = ["complementary_activity_class_log_day", "complementary_activity_class_log_classes", "complementary_activity_class_log_contents", "complementary_activity_class_log_methodologies"]
+
+  }
+  
+  for (var i = 0; i < valores.length; i++) {
+    document.getElementById(campos[i]).value = valores[i];
+  }
+  
+  const METODOLOGIA = 3;
+  if (valores.length > METODOLOGIA){
+      atualizaMetodologia(valores[3]);
+  }else{
+    atualizaMetodologia('');
+  }
+
+
+  
+}
 
 function atualizaRegistroDeAula(){
     console.log('Valor mudou!')
@@ -684,26 +752,9 @@ function atualizaRegistroDeAula(){
     var valor_colado = document.getElementById('colagem').value;
     var valores = valor_colado.replace(/\|/gi,'\t').split("\t");
 
-
-
-
     console.log('Valores:' + valores);
+    atualizaCamposDoRegistroDeAula(valores);
 
-    if (valores.length > 0){
-        document.getElementById('class_log_day').value = valores[0];
-    }
-    if (valores.length > 1){
-        document.getElementById('class_log_classes').value = valores[1];
-    }
-    if (valores.length > 2){
-        document.getElementById('class_log_content').value = valores[2];
-    }
-
-    if (valores.length > 3){
-        atualizaMetodologia(valores[3])
-    }else{
-      atualizaMetodologia('')
-    }
     return;
 }
 
@@ -807,6 +858,8 @@ nomes.rows = "4";
 nomes.title = "Copie essas notas e cole no Excel. Click, CTRL+A, CTRL+C. Abra o excel e CTRL+V."
 nomes.disabled = true;
 nomes.style="width:100%;"
+const BOTACAO_COPIAR_NOMES_ID = "bCopiarNomes";
+var copiar_nomes = `<button id="$BOTACAO_COPIAR_NOMES_ID">Copiar nomes para Excel</button>`
 
 function criarCamposNotas(){
 	//notas.addEventListener("change", atualizaNotas);
@@ -1027,4 +1080,88 @@ if(isPaginaMinhasAulas()){
 function limpar(){
   document.getElementById('registros').value='';
   chrome.storage.sync.set({registros: ''})
+}
+
+
+///////////////////////////////////////////////////////////////////////////
+// Desempenho Escolar
+
+function preencheDesempenhos(){
+  let meses = document.querySelector("#registros").value.split("\n")
+  if (meses[0] == ""){
+      document.querySelector("#registros").value = "Para aprender a utilizar este recurso assista o vídeo:\nhttps://youtu.be/XXXXXXXX"
+      return;
+  }
+
+  meses.forEach((linha, i) => {
+    const [numeroDoMes, valorPadrao] = linha.split(",")
+    if (valorPadrao){
+      preencheDesempenho([valorPadrao], numeroDoMes)
+    }else{
+      let valores = ler_desempenho_do_mes(numeroDoMes-1)
+      preencheDesempenho(valores, numeroDoMes)
+    }
+  });
+}
+
+function ler_desempenho_do_mes(numeroDoMes) {
+  return Array.from(document.querySelectorAll("table tbody tr")).map(function(valor){
+    return valor.querySelectorAll("td select")[numeroDoMes-2].value
+  })
+}
+
+function preencheDesempenho(valores, numeroDoMes){
+  var linhas = Array.from(document.querySelectorAll("table tbody tr"));
+
+  console.log(`Preenchendo mês ${numeroDoMes}: ${valores}`)
+
+  if(valores.length == 1){
+    valores = Array(linhas.length).fill(valores[0])
+  }
+
+  for (var i = 0; i < linhas.length; i++) {
+    linhas[i].querySelectorAll("td select")[numeroDoMes-2].value = valores[i]
+  }
+}
+
+function verificaCategoriaDeMensagemParaAdicionar(categoria) {
+
+  var condicoes = {
+    "novidade": true,
+    "desempenho.edit": isPaginaDesempenhoEscolaEdit(),
+    "minhas.aulas": isPaginaMinhasAulas(),
+    "aulas": isPaginaAulas(),
+    "frequencias": isPaginaFrequencias(),
+    "avaliacao": isPaginaAvaliacao(),
+    "aula.nova": isPaginaNovaAula()
+  }
+
+  return condicoes[categoria];
+}
+
+function atualiza_mensagens () {
+  var mensagens = JSON.parse(this.responseText);
+
+  console.log("mensagens: "+ mensagens)
+
+  var innerHTML = []
+  for(var m in mensagens){
+    let msg = mensagens[m]
+    if (verificaCategoriaDeMensagemParaAdicionar(msg[0])){
+      innerHTML.push(`<i class="${msg[3]}" style="margin-left: 5px;"></i> <a href="${msg[2]}">${msg[1]}</a>\n`)
+    }
+  }
+
+  console.log("innerHTML: " + innerHTML)
+
+  document.querySelector('#mensagens').innerHTML= innerHTML.join("")
+
+};
+
+function baixa_mensagens(){
+  console.log('Baixando mensagens.json')
+  var requisicao = new XMLHttpRequest();
+  requisicao.onload = atualiza_mensagens;
+  requisicao.open("get", "https://raw.githubusercontent.com/edusantana/saber-pb/master/docs/mensagens.json", true);
+  requisicao.send();
 }
