@@ -2,6 +2,8 @@
 
 Extensão para facilitar a vida dos professores ao cadastrar informações no [site do saber do Governo do Estado da Paraíba](http://www.saber.pb.gov.br/).
 
+NOTA 18/6/2021: Estou recebendo relatos de que as atualizações do saber que foram publicadas hoje fez a extensão parar de funcionar. Ainda não analisei o problema, quando eu resolver gravo um vídeo avisando no youtude.
+
 # Resumo executivo
 
 - Você pode instalar através [desse link, no Google Chrome Web Store](https://chrome.google.com/webstore/detail/saber-pb/pfnoopdjbdpgegpkihfmlofngfdkjfem?hl=pt-BR), o seguinte vídeo mostra a instalação:
