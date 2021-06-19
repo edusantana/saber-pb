@@ -306,13 +306,16 @@ function criaPainel(){
   let numeroDeAulas   = window.location.pathname.endsWith("class_frequencies")? `<li><a id="salva-n-aulas" href="#">Nº de aulas seguidas</a></li><li class="divider"></li>`: ""
   let comentariosDeTurmas = isPaginaMinhasAulas()? `<li><a id="comentarios" href="#" accesskey="c"><u>C</u>riar comentários</a></li><li class="divider"></li>`: ""
   let salvaListaDeTurmasDaTabela  = isPaginaMinhasAulas()? `<li><a id="salvarTurmas" href="#" accesskey="t">Salvar ordem de <u>t</u>urmas</a></li><li class="divider"></li>`: ""
+  var sair = document.querySelector("#loginbar > li:nth-child(6) > a").textContent
+  var nome = sair.substring(sair.lastIndexOf('(')+1, sair.indexOf(')'));
+  let placeholder = `Oi ${nome}, considere realizar uma Assinatura para apoiar o desenvolvimento desta extensão.`
 
   let meses = `<li><a id="preencheDesempenhos" href="#"  accesskey="m">Preencher co<u>m</u>petências</a></li>`;
 
   painel.innerHTML = `
     <div class="row">
       <div class="span10">
-        <textarea class="span10" id="registros" name="registros" rows="4" title="Área de transferência"></textarea>
+        <textarea class="span10" id="registros" name="registros" rows="4" title="Área de transferência" placeholder="${placeholder}"></textarea>
       </div>
       <div class="span2 text-left" id="acoes">
         <div class="btn-group">
@@ -404,7 +407,6 @@ if (window.location.pathname.endsWith("class_logs")
   }
 
   restore_options();
-  apresenta_oculta_assinatura();
   baixa_mensagens();
 
   chrome.storage.onChanged.addListener(function(changes, namespace) {
@@ -412,35 +414,10 @@ if (window.location.pathname.endsWith("class_logs")
       	if (key == "registros"){
       		restore_options();
       	}
-        if (key == "apresentar_assinatura"){
-          apresenta_oculta_assinatura();
-        }
       }
     });
 }
 
-
-/*
-* Exibe ou oculta o botação Assinatura
-*/
-function apresenta_oculta_assinatura(){
-  chrome.storage.sync.get({
-		apresentar_assinatura: true
-	}, function(items) {
-    //console.log("apresentar_assinatura")
-    //console.log(items)
-    if (document.getElementById('assinatura_div')){
-      if (items.apresentar_assinatura){
-        document.getElementById('assinatura_div').style.display = "block";
-        var sair = document.querySelector("#loginbar > li:nth-child(6) > a").textContent
-        var nome = sair.substring(sair.lastIndexOf('(')+1, sair.indexOf(')'));
-        document.getElementById('registros').placeholder = `Oi ${nome}, considere realizar uma Assinatura para apoiar o desenvolvimento desta extensão.`
-      }else{
-        document.getElementById('assinatura_div').style.display = "none";
-      }
-    }
-	});
-}
 
 /* =========== PAINEL FIM  ==================*/
 
@@ -600,14 +577,6 @@ function adicionaSeletorDePresencao(){
 
 }
 
-function mudaPresencaoPadraoCasoPortaria(){
-  chrome.storage.sync.get('portaria418', function(data) {
-	   if (data.portaria418){
-       marca_nao_registrado();
-     }
-   });
-}
-
 if (window.location.pathname.includes("class_frequencies")){
     if (window.location.pathname.includes("/new") || window.location.pathname.includes("/edit")){
         console.log('Adicionando input de registro de frequência')
@@ -616,7 +585,6 @@ if (window.location.pathname.includes("class_frequencies")){
         colagem.focus();
         if(window.location.pathname.includes("/new")){
         	atualizaColagemAPartirDoPrimeiroRegistroDaSerie();
-          mudaPresencaoPadraoCasoPortaria();
         }
         adicionaSeletorDePresencao();
     } else {
@@ -654,62 +622,6 @@ function temImpedimentoParaAData(dia, dias_sem_aulas){
 	return temImpedimento;
 }
 
-/**
- * Ler datas sem aulas de opções da extensão
- * @returns
- */
-function realcaDiasSemAulasNaTabela(){
-
-  chrome.storage.sync.get('feriados', function(data) {
-	if (data.feriados!=null){
-	  	var dias_sem_aulas = data.feriados.split("\n");
-	  	//console.log("Configuração de dias sem aulas: '" + dias_sem_aulas+"'");
-
-	  	if (dias_sem_aulas.length == 1){
-	  		if (dias_sem_aulas[0] == ""){
-	  			dias_sem_aulas = []
-	  		}
-	  	}
-
-	  	if (dias_sem_aulas.length >= 1){
-
-	  	  	if (document.getElementsByTagName("tbody").length > 0){
-	  	  		//console.log("Configuração de dias sem aulas: '" + dias_sem_aulas+"'");
-	  	  		let tbody = document.getElementsByTagName("tbody")[0];
-
-	  	  	    for(i=0; i<tbody.children.length; i++){
-	  	  	    	let tr = tbody.children[i]
-	  	  	    	let dia = tr.firstElementChild.textContent; // data
-
-	  	  	    	if(temImpedimentoParaAData(dia, dias_sem_aulas)){
-	  	  	    		// dia sem aula
-	  	  	    		// realça problema na linha
-	  	  	    		tr.className = tr.className + " alert alert-error"
-	  	  	    		tr.title = "Esta data foi configurada como sem aula por você, verifique as opções da extensão."
-	  	  	    		console.log("Identificado atividade em data configurada como sem aula: " + dia);
-	  	  	    	}
-	  	  	    }
-	  	  	}else{
-	  	  		// Não tem registros cadastrados.
-	  	  	}
-
-	  	}else{
-	  		// não tem dias impeditivos cadastrados
-	  	}
-
-	}
-
-  });
-}
-
-
-if (window.location.pathname.endsWith("class_logs")
-		|| window.location.pathname.endsWith("class_frequencies")
-		|| window.location.pathname.endsWith("occurrences")
-		|| window.location.pathname.endsWith("class_ratings")
-		) {
-	realcaDiasSemAulasNaTabela();
-}
 
 function tipoDaPagina() {
   return "class_logs";
@@ -760,22 +672,7 @@ function atualizaRegistroDeAula(){
 
 function atualizaMetodologia(metodologia) {
 
-  chrome.storage.sync.get('portaria418', function(itens) {
-    if (itens.portaria418){
-      if (metodologia == ''){
-        document.getElementById('class_log_methodology').value = "Atividade elaborada em consonância com a publicação da Portaria nº 418/2020 SEECT.";
-      }else{
-        if(metodologia.includes("418")){
-          // ignora se texto contém 418
-          document.getElementById('class_log_methodology').value = metodologia;
-        }else{
-          document.getElementById('class_log_methodology').value = metodologia + "\nAtividade elaborada em consonância com a publicação da Portaria nº 418/2020 SEECT.";
-        }
-      }
-    }else{
-      document.getElementById('class_log_methodology').value = metodologia;
-    }
-  });
+  document.getElementById('class_log_methodology').value = metodologia;
 
 }
 
@@ -961,8 +858,7 @@ if (window.location.pathname.includes("class_ratings") &&
 
 function atualizaColagemAPartirDoPrimeiroRegistroDaSerie(){
 	chrome.storage.sync.get({
-		registros: '',
-    portaria418: false
+		registros: ''
 	}, function(items) {
 	    //var valor_colado = document.getElementById('colagem').value;
 	    //var valores = valor_colado.split("\t");

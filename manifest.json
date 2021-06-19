@@ -1,15 +1,12 @@
 {
-	"manifest_version": 2,
-	"version": "2021.3.28",
+	"manifest_version": 3,
+	"version": "2021.6.19",
 	"name": "Saber PB",
 	"short_name": "saber-pb",
 	"description": "Auxilia os professores do governo do estado da Paraíba agilizando a edição da plataforma do saber.",
 	"homepage_url" : "https://edusantana.github.io/saber-pb/",
 	"permissions": [
-		"storage",
-		"https://github.com/edusantana/saber-pb/*",
-		"https://raw.githubusercontent.com/edusantana/saber-pb/*",
-		"https://raw.githubusercontent.com/edusantana/saber-pb/master/docs/mensagens.json"
+		"storage"	
 	],
 	"icons": {
 		"16": "icon16.png",
@@ -21,7 +18,10 @@
 		{
 			"matches": [
 				"http://www.saber.pb.gov.br/platform/*",
-				"http://saber.pb.gov.br/platform/*"
+				"http://saber.pb.gov.br/platform/*",
+				"https://www.saber.pb.gov.br/platform/*",
+				"https://saber.pb.gov.br/platform/*"
+
 			],
 			"js": [
 				"js/luxon.min.js",

@@ -1,21 +1,19 @@
 // Saves options to chrome.storage
 function save_options() {
   //var color = document.getElementById('color').value;
-  var diasFeriados = document.getElementById('feriados').value.trim();
   var registros= document.getElementById('registros').value.trim().replace(/\|/gi,'\t');
   var aulas_seguidas=document.getElementById('aulas_seguidas').value.trim();
   var justificativa = document.getElementById('justificativa').value.trim();
-  var apresentar_assinatura=document.getElementById('apresentar_assinatura').checked;
-  var portaria418=document.getElementById('portaria418').checked;
+  const presenca = document.getElementById('presenca').value;
+  const assinatura = document.getElementById('assinatura').checked;
   chrome.storage.sync.set({
-  //favoriteColor : color,
-  //likesColor : likesColor,
-  feriados: diasFeriados,
-  registros: registros,
-  aulas_seguidas: aulas_seguidas,
-  apresentar_assinatura: apresentar_assinatura,
-  portaria418: portaria418,
-  justificativa: justificativa
+    //favoriteColor : color,
+    //likesColor : likesColor,
+    registros: registros,
+    aulas_seguidas: aulas_seguidas,
+    justificativa: justificativa,
+    presenca: presenca,
+    assinatura: assinatura
   }, function() {
   // Update status to let user know options were saved.
   var status = document.getElementById('status');
@@ -31,21 +29,20 @@ function save_options() {
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
-  //favoriteColor : 'red',
-  //likesColor : true,
-  feriados: '',
-  registros: '',
-  aulas_seguidas: '1',
-  apresentar_assinatura: true,
-  portaria418: false,
-  justificativa: ""
+    //favoriteColor : 'red',
+    //likesColor : true,
+    registros: '',
+    aulas_seguidas: '1',
+    justificativa: "",
+    presenca: "P",
+    assinatura: false
   }, function(items) {
-  document.getElementById('feriados').value = items.feriados;
-  document.getElementById('registros').value = items.registros;
-  document.getElementById('aulas_seguidas').value = items.aulas_seguidas;
-  document.getElementById('apresentar_assinatura').checked = items.apresentar_assinatura;
-  document.getElementById('portaria418').checked = items.portaria418;
-  document.getElementById('justificativa').value = items.justificativa;
+    document.getElementById('registros').value = items.registros;
+    document.getElementById('aulas_seguidas').value = items.aulas_seguidas;
+    document.getElementById('justificativa').value = items.justificativa;
+    document.getElementById('presenca').value = items.presenca;
+    document.getElementById('assinatura').checked = items.assinatura;
+    atualizaPassosDaAssinatura();
   });
 }
 
@@ -77,18 +74,6 @@ function atualizaTurmas(){
     }
 
   });
-}
-
-function atualixa_caixa_feriados () {
-  document.getElementById('feriados').value=this.responseText
-};
-
-function carrega_calendario(){
-  console.log('Carregando calendário')
-  var requisicao = new XMLHttpRequest();
-  requisicao.onload = atualixa_caixa_feriados;
-  requisicao.open("get", "https://github.com/edusantana/saber-pb/raw/master/feriados-escolares.txt", true);
-  requisicao.send();
 }
 
 function limpar(){
@@ -187,8 +172,17 @@ function criarFrequencias() {
   }
 }
 
+function atualizaPassosDaAssinatura(){
+  if (document.getElementById('assinatura').checked){
+    document.getElementById('assinatura_step').className = "completed step";
+    $("#considere_assinatura").hide();
+  }else{
+    document.getElementById('assinatura_step').className = "active step";
+    $("#considere_assinatura").show();
+  }
+}
+
 document.getElementById('save').addEventListener('click', save_options);
-document.getElementById('carrega_calendario').addEventListener('click', carrega_calendario);
 document.getElementById('limpar').addEventListener('click', limpar);
 document.getElementById('guardar').addEventListener('click', guardar);
 document.getElementById('recuperar').addEventListener('click', recuperar);
@@ -197,6 +191,7 @@ document.getElementById('abrirTurma').addEventListener('click', abrirTurma);
 document.getElementById('criarAulas').addEventListener('click', criarAulas);
 document.getElementById('criarFrequencias').addEventListener('click', criarFrequencias);
 
+document.getElementById('assinatura').addEventListener('change', atualizaPassosDaAssinatura);
 
 document.addEventListener('DOMContentLoaded', restore_options);
 document.addEventListener('DOMContentLoaded', atualizaTurmas);
@@ -209,6 +204,7 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
     	}
     }
   });
+
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
     for (key in changes) {
