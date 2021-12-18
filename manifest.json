@@ -17,11 +17,10 @@
 	"content_scripts": [
 		{
 			"matches": [
-				"http://www.saber.pb.gov.br/platform/*",
+				"http://*.saber.pb.gov.br/platform/*",
 				"http://saber.pb.gov.br/platform/*",
-				"https://www.saber.pb.gov.br/platform/*",
+				"https://*.saber.pb.gov.br/platform/*",
 				"https://saber.pb.gov.br/platform/*"
-
 			],
 			"js": [
 				"js/luxon.min.js",
