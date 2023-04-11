@@ -4,7 +4,7 @@ Olá professor, obrigado por todas as suas contribuições!
 
 Eu criei a extensão para ajudá-los e sou muito grato por sua contribuição. 
 
-Infelizmente eu não posso cancelar sua assinatura por você, este procedimento precisa ser realizado por você mesmo. [Ceja as instruções de como fazer através desse link](https://help.hotmart.com/pt-BR/article/como-cancelar-uma-assinatura/115002183968).
+Infelizmente eu não posso cancelar sua assinatura por você, este procedimento precisa ser realizado por você mesmo. [Veja as instruções de como cancelar a assinatura através desse link](https://help.hotmart.com/pt-BR/article/como-cancelar-uma-assinatura/115002183968).
 
 Obrigado pelo apoio!
 
