@@ -1,17 +1,12 @@
 # Cancelamento da assinatura
 
-Olá querido usuário da extensão do saber-pb, obrigado por todas as contribuições!
+Olá professor, obrigado por todas as suas contribuições!
 
-Eu criei a extensão para auxiliar os professores do governo do estada Paraíba, e agora
+Eu criei a extensão para ajudá-los e sou muito grato por sua contribuição. 
 
-Você já contribuiu e agora deseja encerrar sua contribuição cancelando a assinatura?
-
-Você está interessado(a) em cancelar a assinatura? Abaixo estão as instruções para realizar o cancelamento.
-
-O cancelamento da assinatura deve ser realizado diretamente através da plataforma hotmart, [veja as instruções de como fazer através desse link](https://help.hotmart.com/pt-BR/article/como-cancelar-uma-assinatura/115002183968).
+Infelizmente eu não posso cancelar sua assinatura por você, este procedimento precisa ser realizado por você mesmo. [Ceja as instruções de como fazer através desse link](https://help.hotmart.com/pt-BR/article/como-cancelar-uma-assinatura/115002183968).
 
 Obrigado pelo apoio!
-
 
 <!-- Vídeo https://www.youtube.com/watch?v=3ViqpKysF7s -->
 
